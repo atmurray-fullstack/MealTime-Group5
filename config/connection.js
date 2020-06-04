@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const instanceOfSequelize = new Sequelize('mealTime_db', 'root', 'root', {
+const sequelize = new Sequelize('mealTime_db', 'root', 'root', {
     host: 'localhost',
     port: 3307,
     dialect: 'mysql',
@@ -11,7 +11,7 @@ const instanceOfSequelize = new Sequelize('mealTime_db', 'root', 'root', {
     }
 });
 
-module.exports = instanceOfSequelize;
+module.exports = sequelize;
 
 
 
@@ -19,9 +19,6 @@ module.exports = instanceOfSequelize;
 
 
 
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log(connection.state)
-});
 
-module.exports = connection;
+
+module.exports = sequelize;

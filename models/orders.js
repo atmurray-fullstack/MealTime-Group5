@@ -4,12 +4,15 @@ const sequelize = require('../config/connection.js');
 const Orders = sequelize.define('orders', {
     userName: Sequelize.STRING,
     restaurant: Sequelize.STRING,
-    order: Sequelize.STRING,
+    orders: Sequelize.STRING,
     total: Sequelize.DECIMAL,
     orderDate: Sequelize.DATEONLY
-}, { freezeTableName: true });
+}, { 
+    freezeTableName: true,
+    timestamps:false
+});
 
-Orders.sync({ force: true });
+Orders.sync();
 
 
 module.exports = Orders;

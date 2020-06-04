@@ -8,9 +8,12 @@ const User = sequelize.define('userProfiles', {
     userName: Sequelize.STRING,
     passWord: Sequelize.STRING,
     address: Sequelize.STRING
-}, { freezeTableName: true });
+}, { 
+    freezeTableName: true,
+    timestamps: false
+});
 
-User.sync({ force: true });
+User.sync();
 
 
 module.exports = User;
