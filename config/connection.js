@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const instanceOfSequelize = new Sequelize('mealTime_db', 'root', 'root', {
     host: 'localhost',
-    port: 3306,
+    port: 3307,
     dialect: 'mysql',
     pool: {
         max: 5,
