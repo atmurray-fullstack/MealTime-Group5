@@ -1,4 +1,15 @@
-.nav-wrapper {
-    font-size: 14px;
-    font-weight: bold;
+
+.parallax-container {
+    height: "500px";
+    padding: 0%;
   }
+.nav-wrapper {
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 5%;
+}
+
+
+.container-footer {
+  padding-bottom: 2%;
+}
