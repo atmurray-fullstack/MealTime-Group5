@@ -2,8 +2,12 @@
 const express = require('express');
 const app = express();
 
+var session = require("express-session");
+// var passport = require("./config/passport");
+
 const connection = require('./config/connection');
 const exphbs = require('express-handlebars');
+
 
 //assigning port
 var PORT = process.env.PORT ||8080;
@@ -12,6 +16,7 @@ var PORT = process.env.PORT ||8080;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 ///setting up express-handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
