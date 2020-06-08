@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const Orders = require("../models/orders");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 module.exports = function (app) {
 console.log("api-routes")
@@ -11,7 +11,7 @@ app.post("/api/createUser", (req, res) => {
     
     User.create(user)
     .then(()=>{
-        res.redirect("/member")
+        res.redirect("/register")
     })
    
    

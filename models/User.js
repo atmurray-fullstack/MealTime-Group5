@@ -13,6 +13,8 @@ const User = sequelize.define('userProfiles', {
     timestamps: false
 });
 
+
+
 User.sync();
 
 

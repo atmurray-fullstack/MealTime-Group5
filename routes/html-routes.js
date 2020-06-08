@@ -6,13 +6,11 @@ module.exports = function(app){
     console.log('html-routes');
 
  app.get('/',function(req, res){
+
     console.log(path.join(__dirname, '../views/index.handlebars'))
 
     res.render(path.join(__dirname, '../views/index.handlebars'))
-    //  User.findAll()
-    //  .then(data=>{
-    //      res.json(data);
-    //  })
+
  })
 
  app.get('/test', function(req, res){
@@ -40,6 +38,7 @@ module.exports = function(app){
 
  app.get('/register',function(req, res){
    console.log(path.join(__dirname, '../views/signup.handlebars'))
+
 
    res.render(path.join(__dirname, '../views/signup.handlebars'))
 });
