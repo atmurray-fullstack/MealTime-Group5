@@ -8,10 +8,9 @@ const app = express();
 const connection = require('./config/connection');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
-const LocalStategy = require("passport-local").Strategy;
 const session = require("express-session");
-const initializePassport = require("./config/passport-config");
-initializePassport(passport);
+
+// initializePassport(passport);
 //assigning port
 var PORT = process.env.PORT ||8080;
 
