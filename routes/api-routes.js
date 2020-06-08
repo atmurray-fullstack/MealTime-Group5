@@ -9,9 +9,12 @@ app.post("/api/createUser", (req, res) => {
     console.log(req.body);
     const user = req.body;
     
-    // User.create(user)
+    User.create(user)
+    .then(()=>{
+        res.redirect("/member")
+    })
    
-    res.json({});
+   
 })
 
 
