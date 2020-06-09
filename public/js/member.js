@@ -1,3 +1,5 @@
+var currYear = (new Date()).getFullYear();
+
 let currentUser = getCookie("mealTime-userName");
 if (currentUser==="false"){
     document.location.href = '/'
@@ -5,7 +7,21 @@ if (currentUser==="false"){
 
 $(document).ready(function () {
     $('.parallax').parallax();
+
+    $("#submitInfor").on("click", function (event) {
+        event.preventDefault()
+    });
+
     // deleteUser();
+
+
+    $(".datepicker").datepicker({
+        // setDefaultDate: new Date(2000,01,31),
+        defaultDate: new Date(currYear - 20, 1, 31),
+        maxDate: new Date(currYear - 20, 12, 31),
+        yearRange: [1928, currYear - 20],
+        format: "yyyy/mm/dd"
+    });
 
 });
 
