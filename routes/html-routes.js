@@ -7,8 +7,6 @@ module.exports = function(app){
 
  app.get('/',function(req, res){
 
-    console.log(path.join(__dirname, '../views/index.handlebars'))
-
     res.render(path.join(__dirname, '../views/index.handlebars'))
 
  })
@@ -34,14 +32,11 @@ module.exports = function(app){
  })
 
  app.get('/register',function(req, res){
-   console.log(path.join(__dirname, '../views/signup.handlebars'))
-
 
    res.render(path.join(__dirname, '../views/signup.handlebars'))
 });
 
 app.get('/member',function(req, res){
-   console.log(path.join(__dirname, '../views/member.handlebars'))
 
    res.render(path.join(__dirname, '../views/member.handlebars'))
 
