@@ -1,6 +1,6 @@
-var Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 const sequelize = require('../config/connection.js');
-
+const bcrypt = require('bcryptjs');
 ///building User model
 const User = sequelize.define('userProfiles', {
     first_name: Sequelize.STRING,
@@ -12,6 +12,8 @@ const User = sequelize.define('userProfiles', {
     freezeTableName: true,
     timestamps: false
 });
+
+
 
 User.sync();
 

@@ -23,13 +23,15 @@ $(document).ready(function () {
         if (!user.email || !user.password) {
             return;
         }
-
-
-        createNewUser(user.firstName, user.lastName, user.address, user.email, user.password)
+        createNewUser(user.firstName, user.lastName, user.address, user.email, user.passworfirstName)
+        firstName.val("");
+        lastName.val("");
+        address.val("");
+        email.val("");
+        password.val("");
     })
 
     function createNewUser(fName, lName, address, email, password) {
-
         $.post("/api/createUser", {
             first_name: fName,
             last_name: lName,
