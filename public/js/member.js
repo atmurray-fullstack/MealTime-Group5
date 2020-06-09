@@ -1,14 +1,9 @@
-$(document).ready(function(){
-    $('.parallax').parallax();
-});
 
-$(document).ready(function(){
-
-});
 
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
+    $('.parallax').parallax();
   $(".datepicker").datepicker({
     // setDefaultDate: new Date(2000,01,31),
     defaultDate: new Date(currYear - 20, 1, 31),
@@ -17,6 +12,3 @@ $(document).ready(function () {
     format: "yyyy/mm/dd"
   });
 });
-// $(document).ready(function(){
-//     $('.collapsible').collapsible();
-//   });
