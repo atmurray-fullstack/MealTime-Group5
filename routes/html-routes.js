@@ -17,8 +17,7 @@ module.exports = function (app) {
       if (req.params.string === "register") {
          res.render(path.join(__dirname, '../views/signup.handlebars'))
       } else if (req.params.string === "member") {
-         res.render(path.join(__dirname, '../views/index.handlebars'))
-
+         res.render(path.join(__dirname, '../views/member.handlebars'))
       } else {
          res.render(path.join(__dirname, '../views/index.handlebars'))
 
