@@ -26,6 +26,8 @@ $(document).ready(function () {
             .done((data => {
                 console.log(data);
                 if (data) {
+                    localStorage.setItem("user",data.userName);
+                    localStorage.setItem("address",data.address);
                     document.location.href = '/member'
                 } else {
                     alert("Incorrect Login")

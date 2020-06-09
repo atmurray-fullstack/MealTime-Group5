@@ -27,17 +27,17 @@ module.exports = function (app) {
                 passWord: user.passWord
             }
         }).then(data => {
-
-
             if (data === null) {
-
-               return res.send(false)
+                return res.send(false)
             } else if (data.dataValues.userName === user.userName &&
                 data.dataValues.passWord === user.passWord) {
-                    console.log("you got the conditionals right")
-               return res.json(user);
-            }else{
-              return  console.log("something not quite right.")
+                console.log("you got the conditionals right")
+                return res.json({
+                    userName:data.dataValues.userName,
+                    address:data.dataValues.address
+                });
+            } else {
+                return console.log("somethings not quite right.")
             }
 
         })
