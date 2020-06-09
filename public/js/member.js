@@ -5,7 +5,7 @@ if (currentUser==="false"){
 
 $(document).ready(function () {
     $('.parallax').parallax();
- 
+    // deleteUser();
 
 });
 
