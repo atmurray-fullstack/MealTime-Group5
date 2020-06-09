@@ -28,6 +28,9 @@ $(document).ready(function () {
             .done((data => {
                 console.log(data);
                 if (data) {
+                    localStorage.setItem("user",data.userName);
+                    localStorage.setItem("address",data.address);
+                    document.cookie = "mealTime-userName ="+data.userName+";path=/"
                     document.location.href = '/member'
                 } else {
                     alert("Incorrect Login")
