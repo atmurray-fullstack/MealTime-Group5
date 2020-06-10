@@ -1,38 +1,30 @@
 
 const sequelize = require('sequelize');
-const User =  require('../models/User')
+const User = require('../models/User')
 const path = require('path')
-module.exports = function(app){
-    console.log('html-routes');
+module.exports = function (app) {
+   console.log('html-routes');
 
- app.get('/',function(req, res){
+   app.get('/', function (req, res) {
 
-    res.render(path.join(__dirname, '../views/index.handlebars'))
+      res.render(path.join(__dirname, '../views/index.handlebars'))
 
- })
+   });
 
- app.get('/test', function(req, res){
 
-   let context= {
-      restaurant:[
-         {
-            mIcon: "restaurant",
-            name: "Sushi",
-            fact: "Lorem ipsum dolor sit amet"
-         },
-         {
-            mIcon: "restaurant",
-            name: "Americana",
-            fact: "YUM!"
-         }
-      ]
-   }
-    res.render("login", context)
+   app.get('/:string', function (req, res) {
 
- })
+      if (req.params.string === "register") {
+         res.render(path.join(__dirname, '../views/signup.handlebars'))
+      } else if (req.params.string === "member") {
+         res.render(path.join(__dirname, '../views/member.handlebars'))
+      } else {
+         res.render(path.join(__dirname, '../views/index.handlebars'))
 
- app.get('/register',function(req, res){
+      }
+   })
 
+<<<<<<< HEAD
    res.render(path.join(__dirname, '../views/signup.handlebars'))
 });
 
@@ -48,4 +40,7 @@ app.get('/mealplans',function(req, res){
 
 })
 };
+=======
+}
+>>>>>>> ac9c41c490e6d4eb9decfe8912f8e4d2d5bd33df
 

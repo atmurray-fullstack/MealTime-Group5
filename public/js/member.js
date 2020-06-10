@@ -1,8 +1,9 @@
-
-
-
-
 var currYear = (new Date()).getFullYear();
+
+let currentUser = getCookie("mealTime-userName");
+if (currentUser==="false"){
+    document.location.href = '/'
+}
 
 $(document).ready(function () {
     $('.parallax').parallax();
@@ -11,7 +12,7 @@ $(document).ready(function () {
         event.preventDefault()
     });
 
-
+    // deleteUser();
 
 
     $(".datepicker").datepicker({
@@ -21,7 +22,29 @@ $(document).ready(function () {
         yearRange: [1928, currYear - 20],
         format: "yyyy/mm/dd"
     });
+
 });
 
 
 
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  };
+
+  function deleteUser() {
+    document.cookie = "mealTime-userName ="+false+";path=/"
+    currentUser = null;
+  };
