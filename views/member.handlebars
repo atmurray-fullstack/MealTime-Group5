@@ -91,20 +91,15 @@
                             </li>
                             {{#each restaurants}}
                                 <li>
-                                    <div class="collapsible-header" onclick="handleRestaurantNameClick(this)" data-apiKey={{this.apiKey}}><i class="material-icons">filter_drama</i>{{this.name}}</div>
+                                    <div class="collapsible-header" data-apiKey={{this.apiKey}}><i class="material-icons">filter_drama</i>{{this.name}}</div>
+                                    {{#each this.menuItems}}
+                                    <div class="collapsible-body"><span>{{this.name}}{{this.price}}</span><button>save</button></div>
+                                    {{/each}}
                                 </li>
                             {{/each}}
                         </ul>
                     </div>
                 </div>
-                                    <ul>
-                                    {{#each menuItems}}
-                                    <li>
-                                    <div class="collapsible-body"><span>{{menuItems}} </span><button>save</button></div> 
-                                     </li>
-                                    {{/each}}                                        
-                                    </ul>
-
             </div>
             <div class="col s4">
                 <ul class="collapsible">
