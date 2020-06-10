@@ -49,41 +49,155 @@ module.exports = function (app) {
     })
 
 
-    app.post("/api/submitMealPlan", (req, res) => {
-        // const url = "http://eatstreet.com/publicapi/v1/restaurant/search";
-        const urlParams = [
+    app.post("/api/submitMealPlan", async (req, res) => {
+        const restaurants = await getRestaurants(req);
+        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants})
+    })
 
-            "method=both",
-            "pickup-radius=600",
-            "search=steak",
-            "street-address=2029+pinnacle+point+dr+ga+30071",
+    app.post("/api/searchForMenu", async (req, res) => {
+        const apiKey = req.body.apiKey;
+        const menuItems = await getRestaurantMenuItems(apiKey);
+        res.json(menuItems);
 
-        ];
+    })
+    
+
+};
+
+function makeEatStreetRequest(userSearch, address, res) {
+    const baseURL = 'https://eatstreet.com/publicapi/v1/restaurant/search'
+    const params = [
+        'method=both',
+        'pickup-radius=50',
+        `search=${userSearch}`,
+        `street-address=${address}`,
+    ]
+    const postObject = {
+        headers: {
+            "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+            'Content-Type': 'application/json',
+        },
+        method: "GET",
+    }
+    return https.request(baseURL + '?' + params.join('&'), postObject, (response) => {
+        let chunks = [];
+        response.on('data', (data) => {
+            chunks.push(data)
+        }).on('end', () => {
+            const buffer = Buffer.concat(chunks);
+            const dataObject = JSON.parse(buffer.toString());
+            const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey } })
+ 
+            const apiKey = restaurants.map(restaurant => restaurant.apiKey)
+
+            const menuItemsArray = []
+            for (i = 0; i < apiKey.length; i++) {
+                let oneItem = getMenuItem(apiKey[i]);
+                return menuItemsArray.push(oneItem)
+            }
+            res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants }, { menuItems: menuItemsArray })
+          })
+    })
+}
+
+function getMenuItem(apiKey) {
+
+    const url = 'https://eatstreet.com/publicapi/v1/restaurant/' + apiKey + '/menu'
+    const requestConfig = {
+        headers: {
+            "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+            'Content-Type': 'application/json',
+        },
+        method: "GET",
+    }
+    const httpRequest = https.request(url, requestConfig, (response) => {
+        let chunks = [];
+        response.on('data', (data) => {
+            chunks.push(data)
+        }).on('end', () => {
+
+            const buffer = Buffer.concat(chunks);
+            const dataObject = JSON.parse(buffer.toString());
+            const categoryItems = dataObject.map(category => { return category.items });
+            const menuItems = dataObject.reduce((accumulator, element) => {
+                const items = element.items.map((item) => { return { name: item.name, price: item.basePrice } })
+                return accumulator.concat(items)
+            }, [])
+
+        })
+
+    })
+}
+
+
+function getRestaurants(req) {
+    return new Promise((resolve, reject) => {
+        const address = '2029+pinnacle+point+dr+ga+30071';
+        const userSearch = req.body.keywords;
+        const baseURL = 'https://eatstreet.com/publicapi/v1/restaurant/search'
+        const params = [
+            'method=both',
+            'pickup-radius=50',
+            `search=${userSearch}`,
+            `street-address=${address}`,
+        ]
         const postObject = {
-            headers: { 
-                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======'
+            headers: {
+                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+                'Content-Type': 'application/json',
             },
             method: "GET",
         }
-
-        const httpRequest = https.request('https://eatstreet.com/publicapi/v1/restaurant/search?method=both&pickup-radius=10&search=steak&street-address=2029+pinnacle+point+dr+ga+30071', postObject, function (response) {
-
+        const request = https.request(baseURL + '?' + params.join('&'), postObject, (response) => {
+            let chunks = [];
             response.on('data', (data) => {
-                console.log('' + data)
-                res.send(data)
-            })
-            response.on('end', () => {
-                console.log('end http request');
-                res.end()
+                chunks.push(data)
+            }).on('end', async () => {
+                const buffer = Buffer.concat(chunks);
+                const dataObject = JSON.parse(buffer.toString());
+                const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey } })
+                for (let i=0; i < restaurants.length; i++) {
+                    restaurants[i].menuItems = await getRestaurantMenuItems(restaurants[i].apiKey)
+                }
+                resolve(restaurants);
             })
         })
-
-        httpRequest.on('error', (err) => {
-            console.log(err.message);
+        request.on('error', (err) => {
+            reject(err.message);
         })
-        
-        httpRequest.end();
+        request.end();
     })
+}
 
+function getRestaurantMenuItems(apiKey) {
+        return new Promise((resolve, reject) => {
+        const url = 'https://eatstreet.com/publicapi/v1/restaurant/' + apiKey + '/menu'
+        const requestConfig = {
+            headers: {
+                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+                'Content-Type': 'application/json',
+            },
+            method: "GET",
+        }
+        const request = https.request(url, requestConfig, (response) => {
+            let chunks = [];
+            response.on('data', (data) => {
+                chunks.push(data)
+            }).on('end', () => {
+                const buffer = Buffer.concat(chunks);
+                const dataObject = JSON.parse(buffer.toString());
+                const categoryItems = dataObject.map(category => { return category.items });
+                const menuItems = dataObject.reduce((accumulator, element) => {
+                    const items = element.items.map((item) => { return { name: item.name, price: item.basePrice } })
+                    return accumulator.concat(items)
+                }, [])
+                resolve(menuItems);
+            })
 
-};
+        })
+        request.on('error', (err) => {
+            reject(err.message);
+        })
+        request.end();
+    })
+}
