@@ -28,47 +28,45 @@
             <h2 class="header">Meal Plan</h2>
             <p class="grey-text text-darken-3 lighten-3"> Start Planning Your Meals! </p>
 
-        </div>
-        <div class="row container">
-            <div class="row">
-                <div class="col s4">
-                    <div class="card large">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator"
-                                src="https://www.dusttexhonolulu.com/wp-content/uploads/2018/09/hawaiian-food-recipes.jpg">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Meal Search<i
-                                    class="material-icons right">more_vert</i></span>
-                            <p>Enter the amount you want to spend on a meal and then select either a recipe or a restaurant
-                                menu item.</p>
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Meal Search<i
-                                    class="material-icons right">close</i></span>
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="budget" type="text" class="validate">
-                                        <label for="budget">Meal Budget</label>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <input type=text id="meal-date" class="datepicker">
+    </div>
+    <div class="row container">
+        <div class="row">
+            <div class="col ">
+                <div class="card large col s4">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator"
+                            src="https://www.dusttexhonolulu.com/wp-content/uploads/2018/09/hawaiian-food-recipes.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Meal Search<i
+                                class="material-icons right">more_vert</i></span>
+                        <p>Enter the amount you want to spend on a meal and then select either a recipe or a restaurant
+                            menu item.</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Meal Search<i
+                                class="material-icons right">close</i></span>
+                        <form class="col s12" action="/api/submitMealPlan" method="POST">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="budget" name="budget" type="text" class="validate">
+                                    <label for="budget">Meal Budget</label>
+                                </div>
+                               <div class="input-field col s12">	
+                                        <input type=text id="meal-date" class="datepicker">	
                                         <label for="meal-date">Date of Meal?</label>
-                                        
-                                    </div>
+                                </div>  
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="key-words" name="keywords" type="text">
+                                    <label for="key-words">Likes?</label>
                                 </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="key-words" type="text">
-                                        <label for="key-words">Likes?</label>
-                                    </div>
-                                </div>
-                                <button class="btn waves-effect waves-light" type="submit" name="action" id = "submitInfor">Submit
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </form>
-                        </div>
+                            </div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action" id = "submitInfor">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="col s4">
@@ -80,33 +78,45 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4" <span>Choose a Meal</span>
 
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Options<i
-                                    class="material-icons right">close</i></span>
-                            <ul class="collapsible">
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Options<i
+                                class="material-icons right">close</i></span>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>resturant</div>
+                                <div class="collapsible-body"><span>menu1</span><button>save</button></div>
+                                <div class="collapsible-body"><span>menu2</span><button>save</button></div>
+                                <div class="collapsible-body"><span>menu3</span><button>save</button></div>
+                            </li>
+                            {{#each restaurants}}
                                 <li>
-                                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                    <div class="collapsible-header" data-apiKey={{this.apiKey}}><i class="material-icons">filter_drama</i>{{this.name}}</div>
+                                    {{#each this.menuItems}}
+                                    <div class="collapsible-body"><span>{{this.name}}{{this.price}}</span><button>save</button></div>
+                                    {{/each}}
                                 </li>
-                            </ul>
-                        </div>
+                            {{/each}}
+                        </ul>
                     </div>
                 </div>
-                <div class="col s4">
-                    <ul class="collapsible">
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Selected Date</div>
-                            <div class="collapsible-body"><span>This is what you're eating on this date!</span></div>
-                        </li>
-                    </ul>
-                    <h6>Weekly Total:</h6>
-                    <hr>
-                    <div class="row">
-                        <i class="col s4 medium material-icons">attach_money</i>
-                        <div class="col s8">
-                            <p class="left-align">99999.00</p>
-                        </div>
+            </div>
+            <div class="col s4">
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Selected Date</div>
+                        <div class="collapsible-body"><ul>
+                            <li class=""><span>Pizzae!</span><button>delete</button></li>
+                            <li class=""><span>Taco!</span><button>delete</button></li>
+                        </ul></div>
+                    </li>
+                </ul>
+                <h6>Weekly Total:</h6>
+                <hr>
+                <div class="row">
+                    <i class="col s4 medium material-icons">attach_money</i>
+                    <div class="col s8">
+                        <p class="left-align">99999.00</p>
                     </div>
                 </div>
             </div>
@@ -118,23 +128,27 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="black-text">Contact Us</h5>
-                <p class="black-text text-lighten-4">You can use rows and columns here to organize your footer content.
-                </p>
+                <h5 class="black-text">About Us</h5>
+                <li class="black-text text-lighten-4"> Project Manager/Back-end Developer Andrew Murray
+                <li class="black-text text-lighten-4"> Front-end Developer Maria Jose Riofrio
+                <li class="black-text text-lighten-4"> Back-end Developer Christy
+                <li class="black-text text-lighten-4"> Research Developer Zach
+                </li>
             </div>
             <div class="col l4 offset-l2 s12">
                 <h5 class="black-text">Links</h5>
                 <ul>
-                    <li><a class="black-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="black-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a href="https://atmurray-fullstack.github.io/Andrew-Murray-portfolio/index.html" class="fa fa-github">Andrew</a></li>
+                    <li><a class="fa fa-github" href="https://mariariofrio.github.io/mywebsit/">MariaJose</a></li>
+                    <li><a class="fa fa-github" href="https://mianmianguo2020.github.io/ChristyG_Professional_Materials/">Christy</a></li>
+                    <li><a class="fa fa-github" href="https://github.com/z-riah">Zach</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
+    <div class="footer-copyright-center">
         <div class="container">
             © 2014 Copyright Text
-            <a class="black-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </div>
 </footer>

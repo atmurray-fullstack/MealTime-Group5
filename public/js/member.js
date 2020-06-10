@@ -8,9 +8,9 @@ if (currentUser==="false"){
 $(document).ready(function () {
     $('.parallax').parallax();
 
-    $("#submitInfor").on("click", function (event) {
-        event.preventDefault()
-    });
+    // $("#submitInfor").on("click", function (event) {
+    //     event.preventDefault()
+    // });
 
     // deleteUser();
 
@@ -48,3 +48,13 @@ function getCookie(cname) {
     document.cookie = "mealTime-userName ="+false+";path=/"
     currentUser = null;
   };
+
+
+
+
+function handleRestaurantNameClick(element) {
+    // alert(element.getAttribute('data-apiKey'));
+    $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function(data) {
+            console.log(data)
+    })
+}
