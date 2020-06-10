@@ -8,7 +8,6 @@ var currYear = (new Date()).getFullYear();
 $(document).ready(function () {
   $('.parallax').parallax();
 
-
   $(".logOutButton").on("click", function (event) {
     deleteUser();
     document.location.href = '/member'
@@ -39,6 +38,7 @@ function getCookie(cname) {
     while (c.charAt(0) == ' ') {
       c = c.substring(1);
     }
+
     if (c.indexOf(name) == 0) {
       return c.substring(name.length, c.length);
     }
@@ -46,7 +46,19 @@ function getCookie(cname) {
   return "";
 };
 
-function deleteUser() {
-  document.cookie = "mealTime-userName =" + false + ";path=/"
-  currentUser = null;
-};
+
+  function deleteUser() {
+    document.cookie = "mealTime-userName ="+false+";path=/"
+    currentUser = null;
+  };
+
+
+
+
+function handleRestaurantNameClick(element) {
+    // alert(element.getAttribute('data-apiKey'));
+    $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function(data) {
+            console.log(data)
+    })
+}
+
