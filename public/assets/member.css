@@ -21,4 +21,15 @@ form {
   .container-footer {
     padding-bottom: 2%;
   }
+  .fa {
+    padding: 2px;
+    font-size: 15px;
+    width: 10px;
+    text-align: center;
+    text-decoration: none;
+  }
   
+  /* Add a hover effect if you want */
+  .fa:hover {
+    opacity: 0.7;
+  }
