@@ -47,31 +47,40 @@ module.exports = function (app) {
 
 
     app.post("/api/submitMealPlan", (req, res) => {
-        // const url = "http://eatstreet.com/publicapi/v1/restaurant/search";
-        const urlParams = [
+        const address = '2029+pinnacle+point+dr+ga+30071';
+        const userSearch = req.body.keywords;
+        const mealBudget = "10"
 
-            "method=both",
-            "pickup-radius=600",
-            "search=steak",
-            "street-address=2029+pinnacle+point+dr+ga+30071",
+        const httpRequest = makeEatStreetRequest(userSearch, address, res);
 
-        ];
-        const postObject = {
+        httpRequest.on('error', (err) => {
+            console.log(err.message);
+        })
+        
+        httpRequest.end();
+    })
+
+    app.post("/api/searchForMenu", (req, res) => {
+        const apiKey = req.body.apiKey;
+        console.log(apiKey);
+        const url = 'https://eatstreet.com/publicapi/v1/restaurant/' + apiKey + '/menu'
+        const requestConfig = {
             headers: { 
-                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======'
+                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+                'Content-Type': 'application/json',
             },
             method: "GET",
         }
-
-        const httpRequest = https.request('https://eatstreet.com/publicapi/v1/restaurant/search?method=both&pickup-radius=10&search=steak&street-address=2029+pinnacle+point+dr+ga+30071', postObject, function (response) {
-
-            response.on('data', (data) => {
-                console.log('' + data)
-                res.send(data)
-            })
-            response.on('end', () => {
-                console.log('end http request');
-                res.end()
+        const httpRequest = https.request(url, requestConfig, (response) => {
+            let chunks = [];
+            response.on('data', (data) =>{
+                chunks.push(data)
+            }).on('end', () => {
+                const buffer = Buffer.concat(chunks);
+                const dataObject = JSON.parse(buffer.toString());
+                // console.log(JSON.stringify(dataObject));
+                const menuItem = dataObject.items.map(item => {return { name: item.name, basePrice: item.basePrice}});
+                res.json(JSON.stringify(menuItem));
             })
         })
 
@@ -84,3 +93,32 @@ module.exports = function (app) {
 
 
 };
+
+function makeEatStreetRequest(userSearch, address, res) {
+    const baseURL = 'https://eatstreet.com/publicapi/v1/restaurant/search'
+    const params = [
+        'method=both',
+        'pickup-radius=50',
+        `search=${userSearch}`,
+        `street-address=${address}`,
+    ]
+    const postObject = {
+        headers: { 
+            "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+            'Content-Type': 'application/json',
+        },
+        method: "GET",
+    }
+    return https.request(baseURL + '?' + params.join('&'), postObject, (response) => {
+        let chunks = [];
+        response.on('data', (data) =>{
+            chunks.push(data)
+        }).on('end', () => {
+            const buffer = Buffer.concat(chunks);
+            const dataObject = JSON.parse(buffer.toString());
+            console.log(dataObject);
+            const restaurants = dataObject.restaurants.map(restaurant => {return { name: restaurant.name,  apiKey: restaurant.apiKey }})
+            res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants})
+        })
+    })
+}
