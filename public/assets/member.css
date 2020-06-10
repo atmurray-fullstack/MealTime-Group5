@@ -1,3 +1,14 @@
+.background {
+  background-image: url(tacos.jpg)no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+@media only screen and (min-width: 400px) {
+  .background { 
+      background-image: url('tacos.jpg'); 
+ }
+}
 form {
     border-style: groove;
     padding: 5%;
