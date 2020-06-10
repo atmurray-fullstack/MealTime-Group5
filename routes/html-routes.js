@@ -24,23 +24,5 @@ module.exports = function (app) {
       }
    })
 
-<<<<<<< HEAD
-   res.render(path.join(__dirname, '../views/signup.handlebars'))
-});
-
-app.get('/member',function(req, res){
-
-   res.render(path.join(__dirname, '../views/member.handlebars'))
-
-});
-
-app.get('/mealplans',function(req, res){
-
-   res.render(path.join(__dirname, '../views/mealplans.handlebars'))
-
-})
-};
-=======
 }
->>>>>>> ac9c41c490e6d4eb9decfe8912f8e4d2d5bd33df
 
