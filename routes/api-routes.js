@@ -59,7 +59,7 @@ module.exports = function (app) {
         httpRequest.on('error', (err) => {
             console.log(err.message);
         })
-        
+
         httpRequest.end();
     })
 
@@ -68,7 +68,7 @@ module.exports = function (app) {
         console.log(apiKey);
         const url = 'https://eatstreet.com/publicapi/v1/restaurant/' + apiKey + '/menu'
         const requestConfig = {
-            headers: { 
+            headers: {
                 "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
                 'Content-Type': 'application/json',
             },
@@ -76,26 +76,32 @@ module.exports = function (app) {
         }
         const httpRequest = https.request(url, requestConfig, (response) => {
             let chunks = [];
-            response.on('data', (data) =>{
+            response.on('data', (data) => {
                 chunks.push(data)
             }).on('end', () => {
                 const buffer = Buffer.concat(chunks);
                 const dataObject = JSON.parse(buffer.toString());
                 console.log(JSON.stringify(dataObject));
-                const categoryItems = dataObject.map(category => {return category.items});
+                const categoryItems = dataObject.map(category => { return category.items });
                 const menuItems = dataObject.reduce((accumulator, element) => {
-                    const items = element.items.map((item)=>  {return {name: item.name, price: item.basePrice}})
+                    const items = element.items.map((item) => { return { name: item.name, price: item.basePrice } })
                     return accumulator.concat(items)
                 }, [])
-                console.log(menuItems.slice());
-                res.json(JSON.stringify(menuItems));
+                // const singleItem = menuItems.map(element => element.name)
+                // const UnitPrice = menuItems.map(element => element.price)
+                // console.log(singleItem)
+                // console.log(UnitPrice)
+                console.log(menuItems);
+                // res.json(JSON.stringify(menuItems));
+                res.render(path.join(__dirname, '../views/member.handlebars'), { menuItems: menuItems })
+
             })
         })
 
         httpRequest.on('error', (err) => {
             console.log(err.message);
         })
-        
+
         httpRequest.end();
     })
 
@@ -111,7 +117,7 @@ function makeEatStreetRequest(userSearch, address, res) {
         `street-address=${address}`,
     ]
     const postObject = {
-        headers: { 
+        headers: {
             "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
             'Content-Type': 'application/json',
         },
@@ -119,14 +125,15 @@ function makeEatStreetRequest(userSearch, address, res) {
     }
     return https.request(baseURL + '?' + params.join('&'), postObject, (response) => {
         let chunks = [];
-        response.on('data', (data) =>{
+        response.on('data', (data) => {
             chunks.push(data)
         }).on('end', () => {
             const buffer = Buffer.concat(chunks);
             const dataObject = JSON.parse(buffer.toString());
             // console.log(dataObject);
-            const restaurants = dataObject.restaurants.map(restaurant => {return { name: restaurant.name,  apiKey: restaurant.apiKey }})
-            res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants})
+            const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey } })
+            console.log(restaurants)
+            res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants })
         })
     })
 }

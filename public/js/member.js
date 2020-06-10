@@ -56,5 +56,5 @@ function handleRestaurantNameClick(element) {
     // alert(element.getAttribute('data-apiKey'));
     $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function(data) {
             console.log(data)
-    })
+    }, { dataType: 'html'})
 }
