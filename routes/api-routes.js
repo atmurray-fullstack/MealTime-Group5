@@ -81,9 +81,14 @@ module.exports = function (app) {
             }).on('end', () => {
                 const buffer = Buffer.concat(chunks);
                 const dataObject = JSON.parse(buffer.toString());
-                // console.log(JSON.stringify(dataObject));
-                const menuItem = dataObject.items.map(item => {return { name: item.name, basePrice: item.basePrice}});
-                res.json(JSON.stringify(menuItem));
+                console.log(JSON.stringify(dataObject));
+                const categoryItems = dataObject.map(category => {return category.items});
+                const menuItems = dataObject.reduce((accumulator, element) => {
+                    const items = element.items.map((item)=>  {return {name: item.name, price: item.basePrice}})
+                    return accumulator.concat(items)
+                }, [])
+                console.log(menuItems.slice());
+                res.json(JSON.stringify(menuItems));
             })
         })
 
@@ -119,7 +124,7 @@ function makeEatStreetRequest(userSearch, address, res) {
         }).on('end', () => {
             const buffer = Buffer.concat(chunks);
             const dataObject = JSON.parse(buffer.toString());
-            console.log(dataObject);
+            // console.log(dataObject);
             const restaurants = dataObject.restaurants.map(restaurant => {return { name: restaurant.name,  apiKey: restaurant.apiKey }})
             res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants})
         })
