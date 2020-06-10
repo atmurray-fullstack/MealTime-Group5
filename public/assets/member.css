@@ -1,0 +1,24 @@
+.background {
+  background-image: url(tacos.jpg)no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+@media only screen and (min-width: 400px) {
+  .background { 
+      background-image: url('tacos.jpg'); 
+ }
+}
+form {
+    border-style: groove;
+    padding: 5%;
+  }
+  .nav-wrapper {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 5%;
+  }
+  .container-footer {
+    padding-bottom: 2%;
+  }
+  

@@ -1,0 +1,21 @@
+.background {
+    background-image: url(food.jpg);
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+@media only screen and (min-width: 400px) {
+    .background { 
+        background-image: url('food.jpg'); 
+   }
+}
+.nav-wrapper {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 5%;
+  }
+
+
+.container-footer {
+    padding-bottom: 2%;
+}

@@ -1,0 +1,25 @@
+.background {
+background-image: url(chicken.jpg) no-repeat center center fixed;
+background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+@media only screen and (min-width: 400px) {
+    .background { 
+        background-image: url('chicken.jpg'); 
+   }
+}
+.container-footer {
+    padding-bottom: 2%;
+}
+
+.nav-wrapper {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 5%;
+  }
+
+.header {
+    padding-top: 2%;
+}
+
