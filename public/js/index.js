@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
-    
-    $(".button-collapse").sideNav();
     $(".parallax").parallax();
+    // $(".button-collapse").sideNav();
+    
 
     $("#loginSubmit").on("click", event => {
         event.preventDefault();
