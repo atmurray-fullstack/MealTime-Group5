@@ -40,6 +40,12 @@ app.get('/member',function(req, res){
 
    res.render(path.join(__dirname, '../views/member.handlebars'))
 
+});
+
+app.get('/mealplans',function(req, res){
+
+   res.render(path.join(__dirname, '../views/mealplans.handlebars'))
+
 })
 };
 

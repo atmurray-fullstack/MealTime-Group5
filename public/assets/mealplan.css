@@ -1,6 +1,13 @@
 .background {
     background-image: url(food.jpg);
-    background-size: 100%;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+@media only screen and (min-width: 400px) {
+    .background { 
+        background-image: url('food.jpg'); 
+   }
 }
 .nav-wrapper {
     font-size: 14px;
@@ -8,11 +15,6 @@
     padding-left: 5%;
   }
 
-
-form {
-    border-style: groove;
-    padding: 5%;
-}
 
 .container-footer {
     padding-bottom: 2%;
