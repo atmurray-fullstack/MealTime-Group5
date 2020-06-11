@@ -5,6 +5,10 @@ if (mealTimeCurrentUser.name === "false") {
   document.location.href = '/'
 }
 
+const budget = $("#budget").val().trim();
+const mealDate = $("#mealDate").val().trim();
+const keyWords = $("#key-words").val().trim();
+
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
@@ -18,11 +22,14 @@ $(document).ready(function () {
 
   });
 
+$("#submitInfor").on("submit",(event)=>{
+  event.preventDefault();
 
-
-
+})
 
 });
+
+
 
 
 
@@ -61,3 +68,18 @@ function handleRestaurantNameClick(element) {
   })
 }
 
+
+
+function getRestaurants(){
+
+
+
+};
+
+function getRecipes(){
+  
+};
+
+function getRecipeCosts(){
+
+}
