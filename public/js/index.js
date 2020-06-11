@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
     $(".parallax").parallax();
-    // $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav();
 
     $(document).on('keypress', function (e) {
         if (e.which == 13) {
