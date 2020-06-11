@@ -7,7 +7,7 @@ var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
   $('.parallax').parallax();
-
+console.log(currentUser);
   $(".logOutButton").on("click", function (event) {
     deleteUser();
     document.location.href = '/member'
