@@ -1,7 +1,8 @@
 
 .parallax-container {
-  height: "50px";
-} 
+    height: 35vh;
+    padding: 0%;
+  }
 .nav-wrapper {
   font-size: 14px;
   font-weight: bold;
