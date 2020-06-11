@@ -1,5 +1,7 @@
-let currentUser = getCookie("mealTime-userName");
-if (currentUser === "false") {
+let mealTimeCurrentUser = {};
+mealTimeCurrentUser.name = getCookie("mealTime-userName");
+mealTimeCurrentUser.address = getCookie("mealTime-userAddress");
+if (mealTimeCurrentUser.name === "false") {
   document.location.href = '/'
 }
 
@@ -7,7 +9,7 @@ var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
   $('.parallax').parallax();
-
+  console.log(mealTimeCurrentUser);
   $(".logOutButton").on("click", function (event) {
     deleteUser();
     document.location.href = '/member'
@@ -47,18 +49,19 @@ function getCookie(cname) {
 };
 
 
-  function deleteUser() {
-    document.cookie = "mealTime-userName ="+false+";path=/"
-    currentUser = null;
-  };
+function deleteUser() {
+  document.cookie = "mealTime-userName =" + false + ";path=/"
+  document.cookie = "mealTime-userAddress =" + false + ";path=/"
+  mealTimeCurrentUser = null;
+};
 
 
 
 
 function handleRestaurantNameClick(element) {
-    // alert(element.getAttribute('data-apiKey'));
-    $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function(data) {
-            console.log(data)
-    })
+  // alert(element.getAttribute('data-apiKey'));
+  $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function (data) {
+    console.log(data)
+  })
 }
 
