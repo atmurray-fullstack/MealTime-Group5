@@ -9,10 +9,20 @@ module.exports = function (app) {
     app.post("/api/createUser", (req, res) => {
 
         const user = req.body;
-        User.create(user)
-            .then(() => {
-                res.redirect("/")
-            })
+        User.findOne({
+            where: {
+                userName: user.userName
+            }
+        }).then(data => {
+            if (data === null) {
+                User.create(user)
+                    .then(() => {
+                        res.redirect("/")
+                    })
+            } else {
+                res.send("User already exists.")
+            };
+        })
     })
 
     app.post("/login", (req, res) => {
@@ -30,7 +40,6 @@ module.exports = function (app) {
         }).then(data => {
             console.log(data);
             if (data === null) {
-
                 return res.send(false)
             } else if (data.dataValues.userName === user.userName &&
                 data.dataValues.passWord === user.passWord) {
@@ -51,7 +60,7 @@ module.exports = function (app) {
 
     app.post("/api/submitMealPlan", async (req, res) => {
         const restaurants = await getRestaurants(req);
-        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants})
+        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants })
     })
 
     app.post("/api/searchForMenu", async (req, res) => {
@@ -60,7 +69,7 @@ module.exports = function (app) {
         res.json(menuItems);
 
     })
-    
+
 
 };
 
@@ -87,7 +96,7 @@ function makeEatStreetRequest(userSearch, address, res) {
             const buffer = Buffer.concat(chunks);
             const dataObject = JSON.parse(buffer.toString());
             const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey } })
- 
+
             const apiKey = restaurants.map(restaurant => restaurant.apiKey)
 
             const menuItemsArray = []
@@ -96,7 +105,7 @@ function makeEatStreetRequest(userSearch, address, res) {
                 return menuItemsArray.push(oneItem)
             }
             res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants }, { menuItems: menuItemsArray })
-          })
+        })
     })
 }
 
@@ -156,7 +165,7 @@ function getRestaurants(req) {
                 const buffer = Buffer.concat(chunks);
                 const dataObject = JSON.parse(buffer.toString());
                 const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey } })
-                for (let i=0; i < restaurants.length; i++) {
+                for (let i = 0; i < restaurants.length; i++) {
                     restaurants[i].menuItems = await getRestaurantMenuItems(restaurants[i].apiKey)
                 }
                 resolve(restaurants);
@@ -170,7 +179,7 @@ function getRestaurants(req) {
 }
 
 function getRestaurantMenuItems(apiKey) {
-        return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         const url = 'https://eatstreet.com/publicapi/v1/restaurant/' + apiKey + '/menu'
         const requestConfig = {
             headers: {
