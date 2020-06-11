@@ -1,5 +1,5 @@
 .background {
-  background-image: url(tacos.jpg)no-repeat center center fixed;
+  background-image: url(tacos.jpg);
   background-size: cover;
   height: 100%;
   overflow: hidden;
@@ -33,3 +33,6 @@ form {
   .fa:hover {
     opacity: 0.7;
   }
+  /* #testModal .modal {
+    height: 20%;
+} */
