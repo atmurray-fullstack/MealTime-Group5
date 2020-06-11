@@ -1,24 +1,22 @@
+<script src="/js/index.js"></script>
 
-<link rel="stylesheet" href="/assets/style.css">
 <div>
     <nav class="#b0bec5 blue-grey lighten-3">
         <div class="nav-wrapper">
             <a href="/"></a><img class="responsive-img circle" src="/assets/logo.jpg" style="height: 65px;"></a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="register">New User</a></li>
-                <li><a href="/views/mealplans.handlebars">Meal Plans</a></li>
-                <li><a href="/views/index.handlebars">Live Chat</a></li>
-                <li><a href="/views/index.handlebars">Log In</a></li>
-                {{!-- change href later --}}
+                <li><a href="/register">New User</a></li>
+                <li><a href="/mealplan">Meal Plans</a></li>
+                <li><a href="/">Live Chat</a></li>
+                <li><a class="active" href="/">Log In</a></li>
+               
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li class="active"><a href="/views/signup.handlebars">New User</a></li>
-                <li><a href="/views/mealplans.handlebars">Meal Plans</a></li>
-                <li><a href="/views/index.handlebars">Live Chat</a></li>
-                <li><a href="/views/index.handlebars">Log In</a></li>
-
-
+                <li><a href="/register">New User</a></li>
+                <li><a href="/mealplan">Meal Plans</a></li>
+                <li><a href="/">Live Chat</a></li>
+                <li><a class="active" href="/">Log In</a></li>
             </ul>
         </div>
     </nav>
@@ -48,8 +46,8 @@
                     </div>
                     <div class="row">
                         <div class="col s4 offset-s4">
-                            <a id = "loginSubmit" class="waves-effect waves-light btn-large"><i class="material-icons left">spa</i><i
-                                    class="material-icons right">spa</i>Submit</a>
+                            <a id="loginSubmit" class="waves-effect waves-light btn-large"><i
+                                    class="material-icons left">spa</i><i class="material-icons right">spa</i>Submit</a>
                         </div>
                     </div>
                 </div>
@@ -93,6 +91,6 @@
             © 2014 Copyright Text
         </div>
     </div>
+
 </footer>
 
-<script type="text/javascript" src="/js/index.js"></script>
