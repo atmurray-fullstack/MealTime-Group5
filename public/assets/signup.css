@@ -1,5 +1,5 @@
 .background {
-background-image: url(chicken.jpg) no-repeat center center fixed;
+background-image: url(chicken.jpg);
 background-size: cover;
   height: 100%;
   overflow: hidden;
