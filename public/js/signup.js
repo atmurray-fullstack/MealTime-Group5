@@ -23,7 +23,7 @@ $(document).ready(function () {
         if (!user.email || !user.password) {
             return;
         }
-        createNewUser(user.firstName, user.lastName, user.address, user.email, user.passworfirstName)
+        createNewUser(user.firstName, user.lastName, user.address, user.email, user.password)
         firstName.val("");
         lastName.val("");
         address.val("");
@@ -38,6 +38,8 @@ $(document).ready(function () {
             userName: email,
             passWord: password,
             address: address
+        }).done(data=>{
+            alert(data);
         })
     }
 
