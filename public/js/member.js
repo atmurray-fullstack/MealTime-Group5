@@ -13,7 +13,7 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
-  $('.parallax').parallax();
+  $(".button-collapse").sideNav();
  
 
   console.log(mealTimeCurrentUser);
