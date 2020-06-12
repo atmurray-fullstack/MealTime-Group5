@@ -52,13 +52,11 @@
                 <form class="col s12" action="/api/submitMealPlan" method="POST">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="budget" name="budget" type="text" class="validate">
+                            <input id="budget" name="budget" type="number" class="validate">
                             <label for="budget">Meal Budget</label>
                         </div>
                         <div class=" input-field col s12">
-                            <input id="mealDate" name="mealDateInput" type="date" class="validate">
-                           
-                           
+                            <input id="mealDate" name="mealDate" type="date" class="validate">
                         </div>
                     </div>
                     <div class="row">
@@ -67,13 +65,13 @@
                             <label for="key-words">Likes?</label>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="submitInfor">Submit
-
+                    <button id="submitInfor" class="btn waves-effect waves-light" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
                 </form>
             </div>
         </div>
+        >
 
         <div class="col s4">
             <div class="card large">
