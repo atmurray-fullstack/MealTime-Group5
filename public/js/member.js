@@ -5,11 +5,16 @@ if (mealTimeCurrentUser.name === "false") {
   document.location.href = '/'
 }
 
+
+const budget = $("#budget").val();
+const mealDate = $("#mealDate").val();
+const keyWords = $("#key-words").val();
+
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
-  $('.parallax').parallax();
-
+  $(".button-collapse").sideNav();
+ 
 
   console.log(mealTimeCurrentUser);
   $(".logOutButton").on("click", function (event) {
@@ -18,11 +23,17 @@ $(document).ready(function () {
 
   });
 
+  $("#submitInfor").on("submit", (event) => {
+    event.preventDefault();
+
+    
+    });
 
 
 
+})
 
-});
+
 
 
 
@@ -31,6 +42,7 @@ function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
+
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i];
     while (c.charAt(0) == ' ') {
@@ -42,7 +54,7 @@ function getCookie(cname) {
     }
   }
   return "";
-};
+}
 
 
 function deleteUser() {
@@ -61,3 +73,15 @@ function handleRestaurantNameClick(element) {
   })
 }
 
+
+
+function getRestaurants() {
+
+
+
+};
+
+
+function getRecipeCosts() {
+
+}

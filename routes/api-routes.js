@@ -38,18 +38,15 @@ module.exports = function (app) {
                 passWord: user.passWord
             }
         }).then(data => {
-            console.log(data);
             if (data === null) {
                 return res.send(false)
             } else if (data.dataValues.userName === user.userName &&
                 data.dataValues.passWord === user.passWord) {
-                console.log("you got the conditionals right")
                 return res.json({
                     userName: data.dataValues.userName,
                     address: data.dataValues.address
                 });
             } else {
-                return console.log("somethings not quite right.")
                 return res.json(user);
             }
 
@@ -107,7 +104,7 @@ function makeEatStreetRequest(userSearch, address, res) {
             res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants }, { menuItems: menuItemsArray })
         })
     })
-}
+};
 
 function getMenuItem(apiKey) {
 
@@ -136,7 +133,7 @@ function getMenuItem(apiKey) {
         })
 
     })
-}
+};
 
 
 function getRestaurants(req) {
@@ -176,7 +173,7 @@ function getRestaurants(req) {
         })
         request.end();
     })
-}
+};
 
 function getRestaurantMenuItems(apiKey) {
     return new Promise((resolve, reject) => {
@@ -209,4 +206,22 @@ function getRestaurantMenuItems(apiKey) {
         })
         request.end();
     })
+};
+
+function getRecipes(mealData) {
+
+    const apiKeySpoon = "apiKey=2829f625e48b49fdb3cbc14c2bd99794"
+    let queryURL = "https://api.spoonacular.com/recipes/search?" + apiKeySpoon + "&"+keyWords+"&number=5"
+
+    return $.ajax({
+        url: queryURL,
+        method: "GET",
+        success: (data) => {
+            console.log(mealData);
+            console.log(data.results)
+        }
+    })
+        .catch(err => {
+            console.log(err)
+        });
 }

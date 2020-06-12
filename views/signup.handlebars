@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/CSS/signup.css">
     <nav class="#b0bec5 blue-grey lighten-3">
         <div class="nav-wrapper">
-            <a href="/"></a><img class="responsive-img circle" src="/images/logo.JPG" style="height: 55px;"></a>
+            <a href="/" class="brand-logo"><img class="responsive-img circle" src="/images/logo.JPG" style="height: 55px;"></a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li class="active"><a href="/register">New User</a></li>
@@ -38,29 +38,43 @@
                 <div class="row">
                     <div class="input-field col s4">
                         <input id="signup-firstName" type="text" class="validate">
-                        <label for="signup-firstName">First Name</label>
+                        <label class = "black-text" for="signup-firstName">First Name</label>
                     </div>
                     <div class="input-field col s4">
                         <input id="signup-lastName" type="text" class="validate">
-                        <label for="signup-lastName">Last Name</label>
+                        <label class = "black-text" for="signup-lastName">Last Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
-                        <input value="" id="signup-address" type="text" class="validate">
-                        <label for="signup-address">Address</label>
+                        <input value="" id="signup-addressStreet" type="text" class="validate">
+                        <label class = "black-text" for="signup-addressStreet">Address</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input value="" id="signup-addressCity" type="text" class="validate">
+                        <label class = "black-text" for="signup-addressCity">City</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input maxlength="2" id="signup-addressState" type="text" class="validate">
+                        <label class = "black-text" for="signup-addressState">State</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input value="" id="signup-addressZip" type="number" class="validate">
+                        <label class = "black-text" for="signup-addressZip">Zip Code</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
                         <input id="signup-password" type="password" class="validate">
-                        <label for="signup-password">Password</label>
+                        <label class = "black-text" for="signup-password">Password</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
                         <input id="signup-email" type="email" class="validate">
-                        <label for="signup-email">Email</label>
+                        <label class = "black-text" for="signup-email">Email</label>
                     </div>
                 </div>
                 <button class="btn waves-effect waves-light" type="submit" name="action">Register
