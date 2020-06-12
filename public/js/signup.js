@@ -5,28 +5,37 @@ $(document).ready(function () {
     const form = $("#signup-form");
     const firstName = $("#signup-firstName");
     const lastName = $("#signup-lastName");
-    const address = $("#signup-address");
+    const addressStreet = $("#signup-addressStreet");
+    const addressCity= $("#signup-addressCity");
+    const addressState = $("#signup-addressState");
+    const addressZip = $("#signup-addressZip");
     const email = $("#signup-email");
     const password = $("#signup-password");
 
 
     $("#signup-form").on("submit", (event) => {
         event.preventDefault();
+         
         const user = {
             firstName: firstName.val().trim(),
             lastName: lastName.val().trim(),
-            address: address.val().trim(),
+            address: addressStreet.val().trim()+","+addressCity.val().trim()+","+addressState.val().trim()+".,"+addressZip.val().trim(),
             email: email.val().trim(),
             password: password.val().trim()
         };
-
+        console.log(user);
+        console.log("=".repeat(100))
         if (!user.email || !user.password) {
             return;
         }
         createNewUser(user.firstName, user.lastName, user.address, user.email, user.password)
         firstName.val("");
         lastName.val("");
-        address.val("");
+        addressStreet.val("");
+        addressCity.val("");
+        addressState.val("");
+        addressZip.val("");
+
         email.val("");
         password.val("");
     })
@@ -38,9 +47,7 @@ $(document).ready(function () {
             userName: email,
             passWord: password,
             address: address
-        }).done(data=>{
-            alert(data);
-        })
+        });
     }
 
 });
