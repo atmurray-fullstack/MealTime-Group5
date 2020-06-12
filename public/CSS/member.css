@@ -1,12 +1,18 @@
 .background {
-  background-image: url(tacos.jpg);
+  background-image: url('/images/tacos.jpg');
   background-size: cover;
   height: 100%;
   overflow: hidden;
 }
+.row h2{
+  font-weight: bolder;
+}
+.row p{
+  font-weight:bolder;
+}
 @media only screen and (min-width: 400px) {
   .background { 
-      background-image: url('tacos.jpg'); 
+      background-image: url('/images/tacos.jpg'); 
  }
 }
 form {

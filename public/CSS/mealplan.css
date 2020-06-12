@@ -1,12 +1,12 @@
 .background {
-    background-image: url(food.jpg);
+    background-image: url('/images/food.jpg');
     background-size: cover;
     height: 100%;
     overflow: hidden;
 }
 @media only screen and (min-width: 400px) {
     .background { 
-        background-image: url('food.jpg'); 
+        background-image: url('/images/food.jpg'); 
    }
 }
 .nav-wrapper {
