@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-
+    $(".button-collapse").sideNav();
 
     const form = $("#signup-form");
     const firstName = $("#signup-firstName");
