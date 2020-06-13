@@ -1,12 +1,12 @@
 .background {
-background-image: url(chicken.jpg) no-repeat center center fixed;
+background-image: url('/images/chicken.jpg');
 background-size: cover;
   height: 100%;
   overflow: hidden;
 }
 @media only screen and (min-width: 400px) {
     .background { 
-        background-image: url('chicken.jpg'); 
+        background-image: url('/images/chicken.jpg'); 
    }
 }
 .container-footer {
@@ -23,3 +23,12 @@ background-size: cover;
     padding-top: 2%;
 }
 
+@media (max-width: 600px) {
+  .navbar-material .nav-wrapper .brand-logo img {
+    height: 56px;
+  }
+}
+.side-nav {
+  background-color: #b0bec5;
+  padding-top: 5%;
+}

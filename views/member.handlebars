@@ -1,21 +1,24 @@
 <script type="text/javascript" src="/js/member.js"></script>
+<link rel="stylesheet" href="/CSS/member.css">
 <div>
     <nav class="#B0BEC5 blue-grey lighten-3">
         <div class="nav-wrapper">
-            <a href="/"></a><img class="responsive-img circle" src="/assets/logo.jpg" style="height: 65px;"></a>
+            <a href="/" class="brand-logo">
+                <img class="responsive-img circle" src="/images/logo.jpg" style="height: 55px;">
+            </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="/register">New User</a></li>
-                <li><a href="/mealplan">Meal Plans</a></li>
-                <li><a href="/">Live Chat</a></li>
-                <li><a class="logOutButton" href="/">Log out</a></li>
+                <li class="active"><a href="/views/signup.handlebars">New User</a></li>
+                <li><a href="/views/mealplans.handlebars">Meal Plans</a></li>
+                <li><a href="/views/index.handlebars">Live Chat</a></li>
+                <li><a href="/views/index.handlebars">Log out</a></li>
                 {{!-- change href later --}}
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li class="active"><a href="/register">New User</a></li>
-                <li><a href="/mealplan">Meal Plans</a></li>
-                <li><a href="/">Live Chat</a></li>
-                <li><a class="logOutButton" href="/">Log out</a></li>
+                <li class="active"><a href="/views/signup.handlebars">New User</a></li>
+                <li><a href="/views/mealplans.handlebars">Meal Plans</a></li>
+                <li><a href="/views/index.handlebars">Live Chat</a></li>
+                <li><a href="/views/index.handlebars">Log out</a></li>
 
 
             </ul>
@@ -25,14 +28,12 @@
 <div class="background">
     {{!-- <div class="section white"> --}}
     <div class="row container">
-        <h2 class="header">Meal Plan</h2>
-        <p class="grey-text text-darken-3 lighten-3"> Start Planning Your Meals! </p>
+        <div class="col s6 offset-s3 center-align">
+            <h2 class="header deep-orange-text ">Meal Plan</h2>
+            <p class="black-text lighten-3"> Start Planning Your Meals! </p>
+        </div>
     </div>
-
     <div class="row container">
-
-
-
         <div class="card large col s4">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator"
@@ -50,82 +51,94 @@
                 <form class="col s12" action="/api/submitMealPlan" method="POST">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="budget" name="budget" type="text" class="validate">
+                            <input id="budget" name="budget" type="number" class="validate">
                             <label for="budget">Meal Budget</label>
                         </div>
                         <div class=" input-field col s12">
-                            <input id="mealDate" name="mealDateInput" type="date" class="validate">
-                           
-                           
+                            <input id="mealDate" name="mealDate" type="date" class="validate">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="key-words" name="keywords" type="text">
-                            <label for="key-words">Likes?</label>
-                        </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Meal Search<i
+                                class="material-icons right">more_vert</i></span>
+                        <p>Enter the amount you want to spend on a meal and then select either a recipe or a restaurant
+                            menu item.</p>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="submitInfor">Submit
-
-                        <i class="material-icons right">send</i>
-                    </button>
-                </form>
-            </div>
-        </div>
->
-
-        <div class="col s4">
-            <div class="card large">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator"
-                        src="https://thekitchenrestaurant.com/wp-content/uploads/2014/11/0.0-HOME-PAGE-EW-5971-2560x1200.jpg">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4" <span>Choose a Meal</span>
-
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Options<i
-                            class="material-icons right">close</i></span>
-
-                    <ul class="collapsible">
-                        <li>
-
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>resturant
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Meal Search<i
+                                class="material-icons right">close</i></span>
+                        <form class="col s12" action="/api/submitMealPlan" method="POST">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="budget" name="budget" type="text" class="validate">
+                                    <label for="budget">Meal Budget</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input type=text id="meal-date" class="datepicker">
+                                    <label for="meal-date">Date of Meal?</label>
+                                </div>
                             </div>
-                            <div class="collapsible-body"><span>menu1</span><button>save</button></div>
-                            <div class="collapsible-body"><span>menu2</span><button>save</button></div>
-                            <div class="collapsible-body"><span>menu3</span><button>save</button></div>
-                        </li>
-                        {{#each restaurants}}
-                        <li>
-                            <div class="collapsible-header" data-apiKey={{this.apiKey}}><i
-                                    class="material-icons">filter_drama</i>{{this.name}}</div>
-                            {{#each this.menuItems}}
-                            <div class="collapsible-body">
-                                <span>{{this.name}}{{this.price}}</span><button>save</button></div>
-                            {{/each}}
-                        </li>
-                        {{/each}}
-
-                    </ul>
-                </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="key-words" name="keywords" type="text">
+                                    <label for="key-words">Likes?</label>
+                                </div>
+                            </div>
+                            <button class="btn waves-effect waves-light" type="submit" name="action"
+                                id="submitInfor">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </form>
+                    </div>
             </div>
         </div>
-        <div class="col s4">
-            <ul class="collapsible">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Selected Date</div>
+                    <div class="col s4">
+                <div class="card large">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator"
+                            src="https://thekitchenrestaurant.com/wp-content/uploads/2014/11/0.0-HOME-PAGE-EW-5971-2560x1200.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4" <span>Choose a Meal</span>
 
-                    <div class="collapsible-body">
-                        <ul>
-                            <li class=""><span>Pizzae!</span><button>delete</button></li>
-                            <li class=""><span>Taco!</span><button>delete</button></li>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Options<i
+                                class="material-icons right">close</i></span>
+
+                        <ul class="collapsible unOrderItem">
+                            {{#each restaurants}}
+                            <li>
+                                <div class="collapsible-header" data-apiKey={{this.apiKey}}>
+                                    <i class="material-icons">filter_drama</i>
+                                    <span>{{this.name}}</span>
+                                </div>
+                                {{#each this.menuItems}}
+                                {{#unless orderstatus}}
+                                <div class="collapsible-body">
+                                    <span>{{this.name}} ${{this.price}}</span>
+                                    <button class="saveOrder">save</button>
+                                </div>
+                                {{/unless}}
+                                {{/each}}
+                                {{/each}}
+                            </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Selected Date</div>
+                        <div class="collapsible-body">
+                            <ul class="orderedItem">
 
-                </li>
-            </ul>
+                            </ul>
+
+                        </div>
+                    </li>
+                </ul>
             <h6>Weekly Total:</h6>
             <hr>
             <div class="row">
@@ -134,12 +147,10 @@
                     <p class="left-align">99999.00</p>
                 </div>
             </div>
-        </div>
-
-
+            </div>
     </div>
 </div>
-
+</div>
 
 <footer class="#eceff1 blue-grey lighten-5">
     <div class="container">
