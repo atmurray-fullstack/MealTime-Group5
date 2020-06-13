@@ -33,13 +33,7 @@ $(document).ready(function () {
     shoppingList[restaurantName].push(item)
     window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     const itemList = shoppingList[restaurantName]
-    $('.orderedItem').empty()
-    Object.keys(shoppingList).forEach((element) => {
-      $(".orderedItem").append(`<div>${element} : </div>`)
-      for (let i = 0; i < shoppingList[element].length; i++) {
-        $(".orderedItem").append(`<div><span>${shoppingList[element][i]}</span><button class= "deleteItem">delete</button></div>`)
-      }
-    })
+
   })
 
 
@@ -51,13 +45,13 @@ $(document).on('click', '.deleteItem', function (e) {
   const item = $(event.target).parent().children().first().html();
   Object.keys(shoppingList).forEach((element) => {
     for (let i = 0; i < shoppingList[element].length; i++) {
-      if(shoppingList[element][i]===item) {
-        $("div").remove()
+      if(shoppingList[element][i]=== item) {
+        shoppingList[element].splice(i,1)
       }
      }
   })
-
-
+  window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
+  createItemList(shoppingList)
 });
 
 
@@ -89,11 +83,20 @@ function deleteUser() {
 
 
 function handleRestaurantNameClick(element) {
-  // alert(element.getAttribute('data-apiKey'));
   $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function (data) {
     console.log(data)
   })
 }
 
 
+function createItemList(shoppingList) {
 
+  $('.orderedItem').empty()
+  Object.keys(shoppingList).forEach((element) => {
+    $(".orderedItem").append(`<div>${element} : </div>`)
+    for (let i = 0; i < shoppingList[element].length; i++) {
+      $(".orderedItem").append(`<div><span>${shoppingList[element][i]}</span><button class= "deleteItem">delete</button></div>`)
+    }
+  })
+
+}
