@@ -70,8 +70,6 @@ module.exports = function (app) {
 
 };
 
-<<<<<<< HEAD
-=======
 function makeEatStreetRequest(userSearch, address, res) {
     const baseURL = 'https://eatstreet.com/publicapi/v1/restaurant/search'
     const params = [
@@ -137,7 +135,6 @@ function getMenuItem(apiKey) {
     })
 };
 
->>>>>>> master
 
 function getRestaurants(req) {
     return new Promise((resolve, reject) => {
