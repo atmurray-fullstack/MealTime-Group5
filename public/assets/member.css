@@ -1,0 +1,47 @@
+.background {
+  background-image: url(tacos.jpg);
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+@media only screen and (min-width: 400px) {
+  .background { 
+      background-image: url('tacos.jpg'); 
+ }
+}
+@media (max-width: 600px) {
+  .navbar-material .nav-wrapper .brand-logo img {
+    height: 56px;
+  }
+}
+form {
+    border-style: groove;
+    padding: 5%;
+  }
+  .nav-wrapper {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 5%;
+  }
+  .container-footer {
+    padding-bottom: 2%;
+  }
+  .fa {
+    padding: 2px;
+    font-size: 15px;
+    width: 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  /* Add a hover effect if you want */
+  .fa:hover {
+    opacity: 0.7;
+  }
+  .side-nav {
+    background-color: #b0bec5;
+    padding-top: 5%;
+  }
+  /* #testModal .modal {
+    height: 20%;
+} */

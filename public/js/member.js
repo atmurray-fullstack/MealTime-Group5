@@ -14,20 +14,15 @@ var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
   $(".button-collapse").sideNav();
-
-
   console.log(mealTimeCurrentUser);
+  
   $(".logOutButton").on("click", function (event) {
     deleteUser();
-    document.location.href = '/member'
+    document.location.href = '/'
 
   });
 
-  $("#submitInfor").on("submit", (event) => {
-    event.preventDefault();
 
-
-  });
 
   $(".saveOrder").click(function (event) {
     let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
@@ -42,26 +37,25 @@ $(document).ready(function () {
 
   })
 
+  $(document).on('click', '.deleteItem', function (e) {
+    // e.preventDefault();
+    let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
+    const item = $(event.target).parent().children().first().html();
+    Object.keys(shoppingList).forEach((element) => {
+      for (let i = 0; i < shoppingList[element].length; i++) {
+        if (shoppingList[element][i] === item) {
+          shoppingList[element].splice(i, 1)
+        }
+
+      }
+    })
+    window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
+    createItemList(shoppingList)
+  });
+
 })
 
 
-
-$(document).on('click', '.deleteItem', function (e) {
-  // e.preventDefault();
-  let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
-  const item = $(event.target).parent().children().first().html();
-  Object.keys(shoppingList).forEach((element) => {
-    for (let i = 0; i < shoppingList[element].length; i++) {
-      if (shoppingList[element][i] === item) {
-        shoppingList[element].splice(i, 1)
-      }
-
-    }
-  })
-  window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-  createItemList(shoppingList)
-
-});
 
 
 
@@ -86,6 +80,7 @@ function getCookie(cname) {
 
 function deleteUser() {
   document.cookie = "mealTime-userName =" + false + ";path=/"
+  document.cookie = "mealTime-address =" + false + ";path=/"
   currentUser = null;
 };
 
@@ -119,6 +114,4 @@ function createItemList(shoppingList) {
     $(".totalCost").append(`<p class="left-align">${total}</p>`)
     }   
 }
-
-
 

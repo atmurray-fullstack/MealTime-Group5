@@ -15,12 +15,14 @@ module.exports = function (app) {
             }
         }).then(data => {
             if (data === null) {
+                
                 User.create(user)
                     .then(() => {
-                        res.redirect("/")
+                        res.json({value:false})
                     })
             } else {
-                res.send("User already exists.")
+                res.json({value:true,
+                user:user})
             };
         })
     })
@@ -216,8 +218,7 @@ function getRecipes(mealData) {
         url: queryURL,
         method: "GET",
         success: (data) => {
-            console.log(mealData);
-            console.log(data.results)
+
         }
     })
         .catch(err => {
