@@ -33,6 +33,7 @@ $(document).ready(function () {
     shoppingList[restaurantName].push(item)
     window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     const itemList = shoppingList[restaurantName]
+    createItemList(shoppingList)
 
   })
 
