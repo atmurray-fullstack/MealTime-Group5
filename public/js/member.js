@@ -59,8 +59,6 @@ $(document).ready(function () {
 
 
 
-
-
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -97,18 +95,23 @@ function handleRestaurantNameClick(element) {
 
 
 function createItemList(shoppingList) {
-
+  const allItemLists = []
   $('.orderedItem').empty()
   Object.keys(shoppingList).forEach((element) => {
     if (shoppingList[element].length != 0) {
       $(".orderedItem").append(`<div>${element} : </div>`)
       for (let i = 0; i < shoppingList[element].length; i++) {
         $(".orderedItem").append(`<div><span>${shoppingList[element][i]}</span><button class= "deleteItem">delete</button></div>`)
-      }
-
-    }
+        let newArray = shoppingList[element][i].split("$")
+        // console.log(newArray[newArray.length-1]) 
+        allItemLists.push(newArray[newArray.length-1])
+      }}
 
   })
-
+  if(allItemLists!== null) {
+    $(".totalCost").empty()
+    var total = allItemLists.reduce((total, priceString)=> total + parseFloat(priceString), 0).toFixed(2);
+    $(".totalCost").append(`<p class="left-align">${total}</p>`)
+    }   
 }
 
