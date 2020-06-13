@@ -192,7 +192,6 @@ function getRestaurantMenuItems(apiKey) {
             }).on('end', () => {
                 const buffer = Buffer.concat(chunks);
                 const dataObject = JSON.parse(buffer.toString());
-                const categoryItems = dataObject.map(category => { return category.items });
                 const menuItems = dataObject.reduce((accumulator, element) => {
                     const items = element.items.map((item) => { return { name: item.name, price: item.basePrice } })
                     return accumulator.concat(items)
