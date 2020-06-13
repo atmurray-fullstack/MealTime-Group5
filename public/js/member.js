@@ -24,8 +24,41 @@ $(document).ready(function () {
     format: "yyyy/mm/dd"
   });
 
+  $(".saveOrder").click(function (event) {
+    let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
+    if (window.localStorage.getItem("shoppingList") === null) shoppingList = {};
+    const restaurantName = $(event.target).parent().parent().children().first().find('span').html();
+    const item = $(event.target).parent().children().first().html();
+    if (typeof shoppingList[restaurantName] === "undefined") shoppingList[restaurantName] = []
+    shoppingList[restaurantName].push(item)
+    window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
+    const itemList = shoppingList[restaurantName]
+    $('.orderedItem').empty()
+    Object.keys(shoppingList).forEach((element) => {
+      $(".orderedItem").append(`<div>${element} : </div>`)
+      for (let i = 0; i < shoppingList[element].length; i++) {
+        $(".orderedItem").append(`<div><span>${shoppingList[element][i]}</span><button class= "deleteItem">delete</button></div>`)
+      }
+    })
+  })
+
+
 });
 
+$(document).on('click', '.deleteItem', function (e) {
+  e.preventDefault();
+  let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
+  const item = $(event.target).parent().children().first().html();
+  Object.keys(shoppingList).forEach((element) => {
+    for (let i = 0; i < shoppingList[element].length; i++) {
+      if(shoppingList[element][i]===item) {
+        $("div").remove()
+      }
+     }
+  })
+
+
+});
 
 
 
@@ -47,18 +80,20 @@ function getCookie(cname) {
 };
 
 
-  function deleteUser() {
-    document.cookie = "mealTime-userName ="+false+";path=/"
-    currentUser = null;
-  };
+function deleteUser() {
+  document.cookie = "mealTime-userName =" + false + ";path=/"
+  currentUser = null;
+};
 
 
 
 
 function handleRestaurantNameClick(element) {
-    // alert(element.getAttribute('data-apiKey'));
-    $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function(data) {
-            console.log(data)
-    })
+  // alert(element.getAttribute('data-apiKey'));
+  $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function (data) {
+    console.log(data)
+  })
 }
+
+
 
