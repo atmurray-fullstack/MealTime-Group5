@@ -114,13 +114,3 @@ function createItemList(shoppingList) {
 
 }
 
-function getRestaurants() {
-
-
-
-};
-
-
-function getRecipeCosts() {
-
-}
