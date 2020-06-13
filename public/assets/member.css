@@ -1,5 +1,5 @@
 .background {
-  background-image: url(tacos.jpg)no-repeat center center fixed;
+  background-image: url(tacos.jpg);
   background-size: cover;
   height: 100%;
   overflow: hidden;
@@ -8,6 +8,11 @@
   .background { 
       background-image: url('tacos.jpg'); 
  }
+}
+@media (max-width: 600px) {
+  .navbar-material .nav-wrapper .brand-logo img {
+    height: 56px;
+  }
 }
 form {
     border-style: groove;
@@ -33,3 +38,10 @@ form {
   .fa:hover {
     opacity: 0.7;
   }
+  .side-nav {
+    background-color: #b0bec5;
+    padding-top: 5%;
+  }
+  /* #testModal .modal {
+    height: 20%;
+} */

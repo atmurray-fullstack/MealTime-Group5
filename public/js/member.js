@@ -1,30 +1,39 @@
-let currentUser = getCookie("mealTime-userName");
-if (currentUser === "false") {
+let mealTimeCurrentUser = {};
+mealTimeCurrentUser.name = getCookie("mealTime-userName");
+mealTimeCurrentUser.address = getCookie("mealTime-userAddress");
+if (mealTimeCurrentUser.name === "false") {
   document.location.href = '/'
 }
+
+
+const budget = $("#budget").val();
+const mealDate = $("#mealDate").val();
+const keyWords = $("#key-words").val();
 
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
-  $('.parallax').parallax();
+  $(".button-collapse").sideNav();
+ 
 
+  console.log(mealTimeCurrentUser);
   $(".logOutButton").on("click", function (event) {
     deleteUser();
     document.location.href = '/member'
 
   });
 
+  $("#submitInfor").on("submit", (event) => {
+    event.preventDefault();
+
+    
+    });
 
 
-  $(".datepicker").datepicker({
-    // setDefaultDate: new Date(2000,01,31),
-    defaultDate: new Date(currYear - 20, 1, 31),
-    maxDate: new Date(currYear - 20, 12, 31),
-    yearRange: [1928, currYear - 20],
-    format: "yyyy/mm/dd"
-  });
 
-});
+})
+
+
 
 
 
@@ -33,6 +42,7 @@ function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
+
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i];
     while (c.charAt(0) == ' ') {
@@ -44,21 +54,34 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+
+function deleteUser() {
+  document.cookie = "mealTime-userName =" + false + ";path=/"
+  document.cookie = "mealTime-userAddress =" + false + ";path=/"
+  mealTimeCurrentUser = null;
 };
-
-
-  function deleteUser() {
-    document.cookie = "mealTime-userName ="+false+";path=/"
-    currentUser = null;
-  };
 
 
 
 
 function handleRestaurantNameClick(element) {
-    // alert(element.getAttribute('data-apiKey'));
-    $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function(data) {
-            console.log(data)
-    })
+  // alert(element.getAttribute('data-apiKey'));
+  $.post('/api/searchForMenu', { apiKey: element.getAttribute('data-apiKey') }, function (data) {
+    console.log(data)
+  })
 }
 
+
+
+function getRestaurants() {
+
+
+
+};
+
+
+function getRecipeCosts() {
+
+}

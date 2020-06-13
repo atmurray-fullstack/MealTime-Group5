@@ -9,6 +9,11 @@
         background-image: url('food.jpg'); 
    }
 }
+@media (max-width: 600px) {
+    .navbar-material .nav-wrapper .brand-logo img {
+      height: 56px;
+    }
+  }
 .nav-wrapper {
     font-size: 14px;
     font-weight: bold;
@@ -19,3 +24,7 @@
 .container-footer {
     padding-bottom: 2%;
 }
+.side-nav {
+    background-color: #b0bec5;
+    padding-top: 5%;
+  }
