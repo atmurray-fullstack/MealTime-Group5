@@ -44,9 +44,7 @@ $(document).ready(function () {
             passWord: passWord
         })
             .done((data => {
-                console.log(data);
                 if (data) {
-                    console.log(data);
                     document.cookie = "mealTime-userName =" + data.userName + ";path=/"
                     document.cookie = "mealTime-userAddress =" + data.address + ";path=/"
                     document.location.href = '/member'
