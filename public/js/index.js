@@ -1,7 +1,8 @@
 
 $(document).ready(function () {
     $(".parallax").parallax();
-    // $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav();
+    // $('.sidenav').sidenav();
 
     $(document).on('keypress', function (e) {
         if (e.which == 13) {
@@ -45,9 +46,9 @@ $(document).ready(function () {
             .done((data => {
                 console.log(data);
                 if (data) {
-                    localStorage.setItem("user", data.userName);
-                    localStorage.setItem("address", data.address);
+                    console.log(data);
                     document.cookie = "mealTime-userName =" + data.userName + ";path=/"
+                    document.cookie = "mealTime-userAddress =" + data.address + ";path=/"
                     document.location.href = '/member'
                 } else {
                     alert("Incorrect Login")
