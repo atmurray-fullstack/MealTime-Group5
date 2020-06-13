@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="/assets/style2.css">
+
+<div class="parallax-container">
+    <div class="parallax"><img src="./background2.jpg">
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12 m4 l3">
+                <!-- Note that "m4 l3" was added -->
+                <form class="create-form">
+
+                    <div class="form-group">
+                        <h3>Meal Budget for {{name}}</h3>
+                        <label for="ca" id="font">What do you like?</label>
+                        <input type="text" id="ca" name="name">
+                    </div>
+
+                    <button type="submit">Submit</button>
+                    <div class="col s12 m4 l3">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col s12 m4 l4">
+        <ul class="collapsible popout">
+            {{#each restaurant}}
+            <li>
+                <div class="collapsible-header"><i class="material-icons">{{this.mIcon}}</i>{{this.name}}</div>
+                <div class="collapsible-body"><span>{{this.fact}}</span></div>
+            </li>
+            {{/each }}
+            <li>
+                <div class="collapsible-header"><i class="material-icons">fastfood</i>Chick fil a</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">local_dining</i>BBQ</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">local_bar</i>Longhorn</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">fastfood</i>Wendy's</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">local_pizza</i>Pizza Hut</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col s12 m4 l2">
+        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Dates!</a>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="#!">Monday</a></li>
+            <li><a href="#!">Tuesday</a></li>
+            <li class="divider" tabindex="-1"></li>
+            <li><a href="#!">Wednesday</a></li>
+            <li><a href="#!"><i class="material-icons">Thursday</i>four</a></li>
+            <li><a href="#!"><i class="material-icons">Friday</i>five</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
