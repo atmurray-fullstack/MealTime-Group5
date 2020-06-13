@@ -1,8 +1,11 @@
-<link rel="stylesheet" href="/assets/member.css">
+<script type="text/javascript" src="/js/member.js"></script>
+<link rel="stylesheet" href="/CSS/member.css">
 <div>
     <nav class="#b0bec5 blue-grey lighten-3">
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Logo</a>
+            <a href="/" class="brand-logo">
+            <img class="responsive-img circle" src="/images/logo.jpg" style="height: 55px;">
+            </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li class="active"><a href="/views/signup.handlebars">New User</a></li>
@@ -24,18 +27,36 @@
 </div>
 <div class="background">
     {{!-- <div class="section white"> --}}
-        <div class="row container">
-            <h2 class="header">Meal Plan</h2>
-            <p class="grey-text text-darken-3 lighten-3"> Start Planning Your Meals! </p>
-
+    <div class="row container">
+        <div class="col s6 offset-s3 center-align">
+            <h2 class="header deep-orange-text ">Meal Plan</h2>
+            <p class="black-text lighten-3"> Start Planning Your Meals! </p>
+        </div>
     </div>
     <div class="row container">
-        <div class="row">
-            <div class="col ">
-                <div class="card large col s4">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator"
-                            src="https://www.dusttexhonolulu.com/wp-content/uploads/2018/09/hawaiian-food-recipes.jpg">
+        <div class="card large col s4">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator"
+                    src="https://www.dusttexhonolulu.com/wp-content/uploads/2018/09/hawaiian-food-recipes.jpg">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Meal Search<i
+                        class="material-icons right">more_vert</i></span>
+                <p>Enter the amount you want to spend on a meal and then select either a recipe or a restaurant
+                    menu item.</p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Meal Search<i
+                        class="material-icons right">close</i></span>
+                <form class="col s12" action="/api/submitMealPlan" method="POST">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="budget" name="budget" type="number" class="validate">
+                            <label for="budget">Meal Budget</label>
+                        </div>
+                        <div class=" input-field col s12">
+                            <input id="mealDate" name="mealDate" type="date" class="validate">
+                        </div>
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">Meal Search<i
