@@ -13,6 +13,8 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
+  $(".button-collapse").sideNav();
+
   $("form").submit((event) => {
     // alert("after form submit/ mianmian love peter")
     alert(event.keys())
@@ -22,8 +24,19 @@ $(document).ready(function () {
   createItemList(shoppingList)
 
 
-  $(".button-collapse").sideNav();
-  console.log(mealTimeCurrentUser);
+  $("#submitOrderButton").on("click", event=>{
+    let userInfo={
+      name: JSON.parse(localStorage.getItem("user")).name,
+      orders:localStorage.getItem("shoppingList")
+
+    }
+    console.log(userInfo);
+    $.post("/postOrder",userInfo)
+    .done(data=>{
+      console.log("=".repeat(50)+"/n"+data)
+    })
+
+  })
 
 
   $(".logOutButton").on("click", function (event) {
@@ -110,8 +123,8 @@ function createItemList(shoppingList) {
           let deleteButton = $('<button>delete</button>');
           let itemNamePrice = $(`<span>${shoppingList[date][element][i]}</span>`)
           let newItemDiv = $('<div>');
-          $(newItemDiv).append(itemNamePrice).append(deleteButton);
-          $(newUnorderedList).append(newItemDiv)
+          $(newItemDiv).append(itemNamePrice)
+          $(newUnorderedList).append(newItemDiv).append(deleteButton);
           $(deleteButton).on('click', (event) => {
             let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"));
             console.log(shoppingList[date][element].splice(i, 1))
