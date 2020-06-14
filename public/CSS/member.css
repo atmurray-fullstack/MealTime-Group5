@@ -51,3 +51,7 @@ form {
   /* #testModal .modal {
     height: 20%;
 } */
+
+.collapsible {
+  background-color: white;
+}

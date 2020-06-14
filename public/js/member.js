@@ -13,6 +13,8 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
+  let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
+  createItemList(shoppingList)
   $(".button-collapse").sideNav();
   console.log(mealTimeCurrentUser);
   
@@ -101,7 +103,17 @@ function createItemList(shoppingList) {
     if (shoppingList[element].length != 0) {
       $(".orderedItem").append(`<div>${element} : </div>`)
       for (let i = 0; i < shoppingList[element].length; i++) {
-        $(".orderedItem").append(`<div><span>${shoppingList[element][i]}</span><button class= "deleteItem">delete</button></div>`)
+        let deleteButton = $('<button>delete</button>');
+        let itemNamePrice = $(`<span>${shoppingList[element][i]}</span>`)
+        let newItemDiv = $('<div>');
+        $(newItemDiv).append(itemNamePrice).append(deleteButton);
+        $(".orderedItem").append(newItemDiv)
+        $(newItemDiv).on('click', (event) => {
+          let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"));
+          console.log(shoppingList[element].splice(i, 1))
+          window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+          createItemList(shoppingList)
+        })
         let newArray = shoppingList[element][i].split("$")
         // console.log(newArray[newArray.length-1]) 
         allItemLists.push(newArray[newArray.length-1])

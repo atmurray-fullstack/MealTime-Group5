@@ -59,7 +59,8 @@ module.exports = function (app) {
 
     app.post("/api/submitMealPlan", async (req, res) => {
         const restaurants = await getRestaurants(req);
-        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants })
+        const dayPicked = req.body.pickedday;
+        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants, date: dayPicked })
     })
 
     app.post("/api/searchForMenu", async (req, res) => {
@@ -142,6 +143,7 @@ function getRestaurants(req) {
     return new Promise((resolve, reject) => {
         const address = '2029+pinnacle+point+dr+ga+30071';
         const userSearch = req.body.keywords;
+        const dayPicked = req.body.pickedday;
         const baseURL = 'https://eatstreet.com/publicapi/v1/restaurant/search'
         const params = [
             'method=both',
@@ -163,7 +165,8 @@ function getRestaurants(req) {
             }).on('end', async () => {
                 const buffer = Buffer.concat(chunks);
                 const dataObject = JSON.parse(buffer.toString());
-                const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey } })
+                const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey, date: dayPicked } })
+            
                 for (let i = 0; i < restaurants.length; i++) {
                     restaurants[i].menuItems = await getRestaurantMenuItems(restaurants[i].apiKey)
                 }
