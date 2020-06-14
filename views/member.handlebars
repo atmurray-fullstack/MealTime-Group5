@@ -48,94 +48,92 @@
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Meal Search<i
                         class="material-icons right">close</i></span>
-                       <div class="row">
-                        <div class="input-field col s12">
-                            <input id="budget" name="budget" type="number" class="validate">
-                            <label for="budget">Meal Budget</label>
-                        </div>
-                        <div class=" input-field col s12">
-                            <input id="mealDate" name="mealDate" type="date" class="validate">
-                        </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="budget" name="budget" type="number" class="validate">
+                        <label for="budget">Meal Budget</label>
                     </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Meal Search<i
-                                class="material-icons right">more_vert</i></span>
-                        <p>Enter the amount you want to spend on a meal and then select either a recipe or a restaurant
-                            menu item.</p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Meal Search<i
-                                class="material-icons right">close</i></span>
-                        <form class="col s12" action="/api/submitMealPlan" method="POST">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="budget" name="budget" type="text" class="validate">
-                                    <label for="budget">Meal Budget</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input type=text id="meal-date" class="datepicker" name="pickedday">
-                                    <label for="meal-date">Date of Meal?</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="key-words" name="keywords" type="text">
-                                    <label for="key-words">Likes?</label>
-                                </div>
-                            </div>
-                            <button class="btn waves-effect waves-light" type="submit" name="action"
-                                id="submitInfor">Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </form>
-                    </div>
-            </div>
-        </div>
-                    <div class="col s4">
-                <div class="card large">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator"
-                            src="https://thekitchenrestaurant.com/wp-content/uploads/2014/11/0.0-HOME-PAGE-EW-5971-2560x1200.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4" <span>Choose a Meal</span>
-
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Options<i
-                                class="material-icons right">close</i></span>
-                        <ul class="collapsible unOrderItem">
-                   
-                            {{#each restaurants}}
-                            <li>
-                                <div class="collapsible-header" data-apiKey={{this.apiKey}}>
-                                    <i class="material-icons">filter_drama</i>
-                                    <span>{{this.name}}</span>
-                                </div>
-                                {{#each this.menuItems}}
-                                <div class="collapsible-body">
-                                    <span>{{this.name}} ${{this.price}}</span>
-                                    <button onclick="save(this, '{{../../date}}')">save</button>
-                                    {{!-- <button class="saveOrder" onclick="save('5/1/2019')">save</button> --}}
-                                </div>
-                              
-                                {{/each}}
-                            </li>
-                            {{/each}}
-                        </ul>
+                    <div class=" input-field col s12">
+                        <input id="mealDate" name="mealDate" type="date" class="validate">
                     </div>
                 </div>
-            </div>
-            <div class="col s4">
-                <ul class="collapsible" id="collapsiblelist">
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{date}}</div>
-                        <div class="collapsible-body">
-                            <ul class="orderedItem">
-                             </ul>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Meal Search<i
+                            class="material-icons right">more_vert</i></span>
+                    <p>Enter the amount you want to spend on a meal and then select either a recipe or a restaurant
+                        menu item.</p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Meal Search<i
+                            class="material-icons right">close</i></span>
+                    <form class="col s12" action="/api/submitMealPlan" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="budget" name="budget" type="text" class="validate">
+                                <label for="budget">Meal Budget</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="date" id="meal-date" class="datepicker" name="pickedday">
+                            </div>
                         </div>
-                    </li>
-                </ul>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="key-words" name="keywords" type="text">
+                                <label for="key-words">Likes?</label>
+                            </div>
+                        </div>
+                        <button class="btn waves-effect waves-light" type="submit" name="action" id="submitInfor">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s4">
+            <div class="card large">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator"
+                        src="https://thekitchenrestaurant.com/wp-content/uploads/2014/11/0.0-HOME-PAGE-EW-5971-2560x1200.jpg">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4" <span>Choose a Meal</span>
+
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Options<i
+                            class="material-icons right">close</i></span>
+                    <ul class="collapsible unOrderItem">
+
+                        {{#each restaurants}}
+                        <li>
+                            <div class="collapsible-header" data-apiKey={{this.apiKey}}>
+                                <i class="material-icons">filter_drama</i>
+                                <span>{{this.name}}</span>
+                            </div>
+                            {{#each this.menuItems}}
+                            <div class="collapsible-body">
+                                <span>{{this.name}} ${{this.price}}</span>
+                                <button onclick="save(this, '{{../../date}}')">save</button>
+                                {{!-- <button class="saveOrder" onclick="save('5/1/2019')">save</button> --}}
+                            </div>
+
+                            {{/each}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col s4">
+            <ul class="collapsible" id="collapsiblelist">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{date}}</div>
+                    <div class="collapsible-body">
+                        <ul class="orderedItem">
+                        </ul>
+                    </div>
+                </li>
+            </ul>
             <h6>Weekly Total:</h6>
             <hr>
             <div class="row">
@@ -143,7 +141,13 @@
                 <div class="col s8 totalCost">
                 </div>
             </div>
+            <div class="row">
+                <div class="col s4">
+                    <a id ="submitOrderButton" class="waves-effect waves-light btn">Order</a>
+
+                </div>
             </div>
+        </div>
     </div>
 </div>
 </div>
