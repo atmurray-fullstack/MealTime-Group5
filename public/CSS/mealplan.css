@@ -9,9 +9,9 @@
         background-image: url('/images/food.jpg'); 
    }
 }
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .navbar-material .nav-wrapper .brand-logo img {
-      height: 56px;
+      height: 40px;
     }
   }
 .nav-wrapper {
@@ -28,3 +28,7 @@
     background-color: #b0bec5;
     padding-top: 5%;
   }
+
+.card-title {
+  text-align: center;
+}
