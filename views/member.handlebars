@@ -48,8 +48,7 @@
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Meal Search<i
                         class="material-icons right">close</i></span>
-                <form class="col s12" action="/api/submitMealPlan" method="POST">
-                    <div class="row">
+                       <div class="row">
                         <div class="input-field col s12">
                             <input id="budget" name="budget" type="number" class="validate">
                             <label for="budget">Meal Budget</label>
@@ -116,7 +115,8 @@
                                 {{#each this.menuItems}}
                                 <div class="collapsible-body">
                                     <span>{{this.name}} ${{this.price}}</span>
-                                    <button class="saveOrder">save</button>
+                                    <button onclick="save(this, '{{../../date}}')">save</button>
+                                    {{!-- <button class="saveOrder" onclick="save('5/1/2019')">save</button> --}}
                                 </div>
                               
                                 {{/each}}
@@ -128,7 +128,7 @@
             </div>
             <div class="col s4">
                 <div></div>
-                <ul class="collapsible">
+                <ul class="collapsible orderList">
                     <li>
                         <div><i class="material-icons"></i>{{date}}</div>
                         <div>

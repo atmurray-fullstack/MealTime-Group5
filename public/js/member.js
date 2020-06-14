@@ -13,8 +13,14 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
+  $("form").submit((event)=> {
+      // alert("after form submit/ mianmian love peter")
+      alert(event.keys())
+      $(".orderList").append(`<div><i class="material-icons"></i>${date}</div>`)
+  })
   let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
   createItemList(shoppingList)
+
   $(".button-collapse").sideNav();
   console.log(mealTimeCurrentUser);
   
@@ -25,19 +31,6 @@ $(document).ready(function () {
   });
 
 
-
-  $(".saveOrder").click(function (event) {
-    let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
-    if (window.localStorage.getItem("shoppingList") === null) shoppingList = {};
-    const restaurantName = $(event.target).parent().parent().children().first().find('span').html();
-    const item = $(event.target).parent().children().first().html();
-    if (typeof shoppingList[restaurantName] === "undefined") shoppingList[restaurantName] = []
-    shoppingList[restaurantName].push(item)
-    window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    const itemList = shoppingList[restaurantName]
-    createItemList(shoppingList)
-
-  })
 
   $(document).on('click', '.deleteItem', function (e) {
     // e.preventDefault();
@@ -127,3 +120,14 @@ function createItemList(shoppingList) {
     }   
 }
 
+function save(element, date) {
+  let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
+  if (window.localStorage.getItem("shoppingList") === null) shoppingList = {};
+  const restaurantName = $(element).parent().parent().children().first().find('span').html();
+  const item = $(element).parent().children().first().html();
+  if (typeof shoppingList[restaurantName] === "undefined") shoppingList[restaurantName] = []
+  shoppingList[restaurantName].push(item)
+  window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
+  const itemList = shoppingList[restaurantName]
+  createItemList(shoppingList)
+  }
