@@ -54,6 +54,12 @@ module.exports = function (app) {
 
         })
 
+    });
+
+    app.post("/postOrder",(req,res)=>{
+        console.log(req.body);
+        console.log(JSON.parse(req.body.orders))
+        res.json({});
     })
 
 
