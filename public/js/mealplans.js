@@ -5,4 +5,6 @@ $(document).ready(function () {
         document.location.href = '/member'
     
       });
+
+      
 })

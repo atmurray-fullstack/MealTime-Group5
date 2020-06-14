@@ -111,7 +111,7 @@ module.exports = function (app) {
             }
         }
 
-        res.json({value:true});
+        res.send("Orders Created");
     })
 
 

@@ -33,7 +33,9 @@ $(document).ready(function () {
     
     $.post("/postOrder",userInfo)
     .done(data=>{
-      console.log(data);
+      alert(data);
+ 
+
     })
 
   })
