@@ -77,6 +77,7 @@ module.exports = function (app) {
 
 function getRestaurants(req) {
     return new Promise((resolve, reject) => {
+        // const address = '2029+pinnacle+point+dr+ga+30071';
         const address = '2029+pinnacle+point+dr+ga+30071';
         const userSearch = req.body.keywords;
         const dayPicked = req.body.pickedday;

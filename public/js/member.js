@@ -105,7 +105,7 @@ function createItemList(shoppingList) {
         $(".orderedItem").append(newItemDiv)
         $(newItemDiv).on('click', (event) => {
           let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"));
-          console.log(shoppingList[element].splice(i, 1))
+          // console.log(shoppingList[element].splice(i, 1))
           window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
           createItemList(shoppingList)
         })
