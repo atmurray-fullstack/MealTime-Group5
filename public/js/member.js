@@ -21,9 +21,11 @@ $(document).ready(function () {
   let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
   createItemList(shoppingList)
 
+
   $(".button-collapse").sideNav();
   console.log(mealTimeCurrentUser);
   
+
   $(".logOutButton").on("click", function (event) {
     deleteUser();
     document.location.href = '/'
@@ -130,4 +132,6 @@ function save(element, date) {
   window.localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
   const itemList = shoppingList[restaurantName]
   createItemList(shoppingList)
+  console.log(date)
+  console.log(shoppingList)
   }
