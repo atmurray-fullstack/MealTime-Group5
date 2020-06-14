@@ -30,10 +30,10 @@ $(document).ready(function () {
       orders:localStorage.getItem("shoppingList")
 
     }
-    console.log(userInfo);
+    
     $.post("/postOrder",userInfo)
     .done(data=>{
-      console.log("=".repeat(50)+"/n"+data)
+      console.log(data);
     })
 
   })
