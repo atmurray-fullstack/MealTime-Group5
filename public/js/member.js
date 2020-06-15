@@ -1,6 +1,7 @@
 let mealTimeCurrentUser = {};
 mealTimeCurrentUser.name = getCookie("mealTime-userName");
 mealTimeCurrentUser.address = getCookie("mealTime-userAddress");
+localStorage.setItem("user", JSON.stringify(mealTimeCurrentUser))
 if (mealTimeCurrentUser.name === "false") {
   document.location.href = '/'
 }
@@ -13,11 +14,13 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
-  localStorage.setItem("user",mealTimeCurrentUser.name)
+  const form = $("form")
+  const newInputTag = $("<input>").attr("type", "hidden").attr("name", "address").attr("value", mealTimeCurrentUser.address)
+  form.append(newInputTag)
+
   $(".button-collapse").sideNav();
 
   $("form").submit((event) => {
-    // alert("after form submit/ mianmian love peter")
     alert(event.keys())
     $(".orderList").append(`<div><i class="material-icons"></i>${date}</div>`)
   })
@@ -27,7 +30,7 @@ $(document).ready(function () {
 
   $("#submitOrderButton").on("click", event => {
     let userInfo = {
-      name: localStorage.getItem("user"),
+      name: JSON.parse(localStorage.getItem("user")).name,
       orders: localStorage.getItem("shoppingList")
 
     }
@@ -139,7 +142,6 @@ function createItemList(shoppingList) {
           allItemLists.push(newArray[newArray.length - 1])
           const itemPrice = parseFloat(newArray[newArray.length - 1]);
           total = total + itemPrice;
-          console.log(total);
         }
       }
     })
