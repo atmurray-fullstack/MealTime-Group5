@@ -24,19 +24,17 @@ $(document).ready(function () {
   createItemList(shoppingList)
 
 
-  $("#submitOrderButton").on("click", event=>{
-    let userInfo={
+  $("#submitOrderButton").on("click", event => {
+    let userInfo = {
       name: JSON.parse(localStorage.getItem("user")).name,
-      orders:localStorage.getItem("shoppingList")
+      orders: localStorage.getItem("shoppingList")
 
     }
-    
-    $.post("/postOrder",userInfo)
-    .done(data=>{
-      alert(data);
- 
 
-    })
+    $.post("/postOrder", userInfo)
+      .done(data => {
+        alert(data);
+      })
 
   })
 
@@ -44,8 +42,8 @@ $(document).ready(function () {
   $(".logOutButton").on("click", function (event) {
     deleteUser();
     document.location.href = '/'
-
   });
+
 
 
 
@@ -91,8 +89,8 @@ function getCookie(cname) {
 
 
 function deleteUser() {
-  document.cookie = "mealTime-userName =" + false + ";path=/"
-  document.cookie = "mealTime-address =" + false + ";path=/"
+  document.cookie = "mealTime-userName =false;path=/"
+  document.cookie = "mealTime-address =false;path=/"
   currentUser = null;
 };
 
