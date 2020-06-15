@@ -13,6 +13,7 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
+  localStorage.setItem("user",mealTimeCurrentUser.name)
   $(".button-collapse").sideNav();
 
   $("form").submit((event) => {
@@ -26,7 +27,7 @@ $(document).ready(function () {
 
   $("#submitOrderButton").on("click", event => {
     let userInfo = {
-      name: JSON.parse(localStorage.getItem("user")).name,
+      name: localStorage.getItem("user"),
       orders: localStorage.getItem("shoppingList")
 
     }

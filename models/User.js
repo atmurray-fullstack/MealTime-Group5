@@ -1,7 +1,7 @@
 
 ///building User model
 module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define('userProfiles', {
+    var userprofiles = sequelize.define('userprofiles', {
         first_name: {
             type: DataTypes.STRING
         },
@@ -24,8 +24,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING
         }
 
+    },{
+        timestamps: false
     });
-    return User
+    return userprofiles
 
 };
 

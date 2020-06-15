@@ -1,22 +1,23 @@
-const User = require("../models/User");
-const Orders = require("../models/orders");
+
+
+var db = require("../models");
 const path = require("path");
-const bcrypt = require("bcryptjs");
 const https = require("https");
 
 module.exports = function (app) {
+    console.log("api-routes")
 
     app.post("/api/createUser", (req, res) => {
-
+       
         const user = req.body;
-        User.findOne({
+        db.userprofiles.findOne({
             where: {
                 userName: user.userName
             }
         }).then(data => {
             if (data === null) {
 
-                User.create(user)
+                db.userprofiles.create(user)
                     .then(() => {
                         res.json({ value: false })
                     })
@@ -30,19 +31,20 @@ module.exports = function (app) {
     })
 
     app.post("/login", (req, res) => {
-
+        console.log(req.body)
         const user = {
             userName: req.body.userName,
             passWord: req.body.passWord
         }
-
-        User.findOne({
+        console.log(req.body)
+        db.userprofiles.findOne({
             where: {
                 userName: user.userName,
                 passWord: user.passWord
             }
         }).then(data => {
             if (data === null) {
+                console.log(data)
                 return res.send(false)
             } else if (data.dataValues.userName === user.userName &&
                 data.dataValues.passWord === user.passWord) {
@@ -84,7 +86,7 @@ module.exports = function (app) {
                 orderObject.total = orderCost;
                 orderObject.orderDate = dateKeys[i];
                 console.log(orderObject)
-                Orders.findOne({
+                db.orders.findOne({
                     where: {
                         userName: orderObject.userName,
                         orders: orderObject.orders,
@@ -92,10 +94,10 @@ module.exports = function (app) {
                     }
                 }).then(data => {
                     if (data === null) {
-                        Orders.create(orderObject)
+                        db.orders.create(orderObject)
                     } else {
                         console.log("Order already exists")
-                        Orders.destroy(
+                        db.orders.destroy(
                             {
                                 where: {
                                     userName: orderObject.userName,
@@ -103,7 +105,7 @@ module.exports = function (app) {
                                 }
                             }
                         ).then(() => {
-                            Orders.create(orderObject)
+                            db.orders.create(orderObject)
                         })
                     }
                 })

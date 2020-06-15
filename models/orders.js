@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
 
-    var Orders = sequelize.define("orders", {
+    var orders = sequelize.define("orders", {
         userName: {
             type: DataTypes.STRING,
             validate: {
@@ -20,6 +20,8 @@ module.exports = function (sequelize, DataTypes) {
         orderDate: {
             type: DataTypes.DATEONLY,
         },
+    },{
+        timestamps: false
     });
-    return Orders
+    return orders
 };

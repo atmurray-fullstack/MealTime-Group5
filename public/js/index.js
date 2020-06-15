@@ -39,16 +39,19 @@ $(document).ready(function () {
     })
 
     const loginUser = (userName, passWord) => {
+
         $.post("/login", {
             userName: userName,
             passWord: passWord
         })
             .done((data => {
+                
                 if (data) {
                     document.cookie = "mealTime-userName =" + data.userName + ";path=/"
                     document.cookie = "mealTime-userAddress =" + data.address + ";path=/"
                     document.location.href = '/member'
                 } else {
+                    console.log(data)
                     alert("Incorrect Login")
                 }
             }))
