@@ -121,7 +121,7 @@ module.exports = function (app) {
     app.post("/api/submitMealPlan", async (req, res) => {
         const restaurants = await getRestaurants(req);
         const dayPicked = req.body.pickedday.toString();
-        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants, date: dayPicked })
+        res.render(path.join(__dirname, '../views/member.handlebars'), { restaurants: restaurants, date: dayPicked, budget: req.body.budget })
     })
 
     app.post("/api/searchForMenu", async (req, res) => {

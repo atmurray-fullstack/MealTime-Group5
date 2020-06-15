@@ -144,16 +144,18 @@ function createItemList(shoppingList) {
           allItemLists.push(newArray[newArray.length - 1])
           const itemPrice = parseFloat(newArray[newArray.length - 1]);
           total = total + itemPrice;
+
         }
       }
     })
     $('#collapsiblelist').append(newListItem)
   })
   if (allItemLists !== null) {
-    $(".totalCost").empty()
+    $("#totalOrder").empty()
     // var total = allItemLists.reduce((total, priceString) => total + parseFloat(priceString), 0).toFixed(2);
-    $(".totalCost").append(`<p class="left-align">${total.toFixed(2)}</p>`)
+    $("#totalOrder").text(`Order total:${total.toFixed(2)}`)
   }
+
 }
 
 function save(element, date) {
