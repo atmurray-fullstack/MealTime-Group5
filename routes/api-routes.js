@@ -15,14 +15,16 @@ module.exports = function (app) {
             }
         }).then(data => {
             if (data === null) {
-                
+
                 User.create(user)
                     .then(() => {
-                        res.json({value:false})
+                        res.json({ value: false })
                     })
             } else {
-                res.json({value:true,
-                user:user})
+                res.json({
+                    value: true,
+                    user: user
+                })
             };
         })
     })
@@ -56,10 +58,60 @@ module.exports = function (app) {
 
     });
 
-    app.post("/postOrder",(req,res)=>{
-        console.log(req.body);
-        console.log(JSON.parse(req.body.orders))
-        res.json({});
+    app.post("/postOrder", (req, res) => {
+        let orders = JSON.parse(req.body.orders);
+        let dateKeys = Object.keys(orders);
+
+        for (let i = 0; i < dateKeys.length; i++) {
+
+            let restaurantKeys = Object.keys(orders[dateKeys[i]]);
+            for (let j = 0; j < restaurantKeys.length; j++) {
+                let order = orders[dateKeys[i]][restaurantKeys[j]];
+                let orderObject = {};
+                console.log(order);
+
+                let orderCost = 0;
+                order.forEach(element => {
+                    let index = element.indexOf("$");
+                    let cost = parseFloat(element.slice(index + 1))
+                    console.log(cost)
+                    orderCost += cost
+                });
+
+                orderObject.userName = req.body.name;
+                orderObject.restaurant = restaurantKeys[j];
+                orderObject.orders = orders[dateKeys[i]][restaurantKeys[j]].join();
+                orderObject.total = orderCost;
+                orderObject.orderDate = dateKeys[i];
+                console.log(orderObject)
+                Orders.findOne({
+                    where: {
+                        userName: orderObject.userName,
+                        orders: orderObject.orders,
+                        orderDate: orderObject.orderDate
+                    }
+                }).then(data => {
+                    if (data === null) {
+                        Orders.create(orderObject)
+                    } else {
+                        console.log("Order already exists")
+                        Orders.destroy(
+                            {
+                                where: {
+                                    userName: orderObject.userName,
+                                    orderDate: orderObject.orderDate
+                                }
+                            }
+                        ).then(() => {
+                            Orders.create(orderObject)
+                        })
+                    }
+                })
+
+            }
+        }
+
+        res.send("Orders Created");
     })
 
 
@@ -109,7 +161,7 @@ function getRestaurants(req) {
                 const buffer = Buffer.concat(chunks);
                 const dataObject = JSON.parse(buffer.toString());
                 const restaurants = dataObject.restaurants.map(restaurant => { return { name: restaurant.name, apiKey: restaurant.apiKey, date: dayPicked } })
-            
+
                 for (let i = 0; i < restaurants.length; i++) {
                     restaurants[i].menuItems = await getRestaurantMenuItems(restaurants[i].apiKey)
                 }
@@ -158,7 +210,7 @@ function getRestaurantMenuItems(apiKey) {
 function getRecipes(mealData) {
 
     const apiKeySpoon = "apiKey=2829f625e48b49fdb3cbc14c2bd99794"
-    let queryURL = "https://api.spoonacular.com/recipes/search?" + apiKeySpoon + "&"+keyWords+"&number=5"
+    let queryURL = "https://api.spoonacular.com/recipes/search?" + apiKeySpoon + "&" + keyWords + "&number=5"
 
     return $.ajax({
         url: queryURL,

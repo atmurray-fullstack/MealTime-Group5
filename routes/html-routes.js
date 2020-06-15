@@ -17,6 +17,7 @@ module.exports = function (app) {
       } else if (req.params.string === "member") {
          res.render(path.join(__dirname, '../views/member.handlebars'))
       } else if (req.params.string === "mealplan") {
+         
          res.render(path.join(__dirname, '../views/mealplans.handlebars'))
       } else {
          res.render(path.join(__dirname, '../views/index.handlebars'))
