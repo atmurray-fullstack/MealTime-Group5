@@ -5,15 +5,14 @@ const app = express();
 
 // var passport = require("./config/passport");
 
-const connection = require('./config/connection');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require("express-session");
 
 // initializePassport(passport);
 //assigning port
-var PORT = process.env.PORT ||8080;
-
+var PORT = process.env.PORT || 8080;
+var db = require("./models");
 ///serving up static files and parsing incoming req.body as JSON Obj
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -34,4 +33,8 @@ require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
 
-app.listen(PORT,console.log(`Listening on ${PORT}`));
+db.sequelize.sync().then(function() {
+    app.listen(PORT, function() {
+      console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    });
+  });

@@ -1,21 +1,32 @@
-const Sequelize = require("sequelize");
-const sequelize = require('../config/connection.js');
-const bcrypt = require('bcryptjs');
+
 ///building User model
-const User = sequelize.define('userProfiles', {
-    first_name: Sequelize.STRING,
-    last_name: Sequelize.STRING,
-    userName: Sequelize.STRING,
-    passWord: Sequelize.STRING,
-    address: Sequelize.STRING
-}, { 
-    freezeTableName: true,
-    timestamps: false
-});
+module.exports = function (sequelize, DataTypes) {
+    var User = sequelize.define('userProfiles', {
+        first_name: {
+            type: DataTypes.STRING
+        },
+        last_name: {
+            type: DataTypes.STRING
+        },
+        userName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true
+            }
+        },
+        passWord: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        address: {
+            type: DataTypes.STRING
+        }
+
+    });
+    return User
+
+};
 
 
-
-User.sync();
-
-
-module.exports = User;
