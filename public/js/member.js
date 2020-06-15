@@ -14,16 +14,18 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
-  const form = $("form")
-  const newInputTag = $("<input>").attr("type", "hidden").attr("name", "address").attr("value", mealTimeCurrentUser.address)
-  form.append(newInputTag)
+
+  const form = $("form")
+  const newInputTag = $("<input>").attr("type", "hidden").attr("name", "address").attr("value", mealTimeCurrentUser.address)
+  form.append(newInputTag)
+
 
   $(".button-collapse").sideNav();
 
   $("form").submit((event) => {
     alert(event.keys())
     $(".orderList").append(`<div><i class="material-icons"></i>${date}</div>`)
-  })
+  })    
   let shoppingList = JSON.parse(window.localStorage.getItem("shoppingList"))
   createItemList(shoppingList)
 

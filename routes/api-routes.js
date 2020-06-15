@@ -3,6 +3,7 @@
 var db = require("../models");
 const path = require("path");
 const https = require("https");
+require('dotenv').config();
 
 module.exports = function (app) {
     console.log("api-routes")
@@ -137,8 +138,8 @@ module.exports = function (app) {
 
 function getRestaurants(req) {
     return new Promise((resolve, reject) => {
-        // const address = '2029+pinnacle+point+dr+ga+30071';
-        const address = '2029+pinnacle+point+dr+ga+30071';
+
+        const address = req.body.address;
         const userSearch = req.body.keywords;
         const dayPicked = req.body.pickedday;
         const baseURL = 'https://eatstreet.com/publicapi/v1/restaurant/search'
@@ -150,7 +151,7 @@ function getRestaurants(req) {
         ]
         const postObject = {
             headers: {
-                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+                "X-Access-Token": process.env.KEY,
                 'Content-Type': 'application/json',
             },
             method: "GET",
@@ -182,7 +183,7 @@ function getRestaurantMenuItems(apiKey) {
         const url = 'https://eatstreet.com/publicapi/v1/restaurant/' + apiKey + '/menu'
         const requestConfig = {
             headers: {
-                "X-Access-Token": 'VBVMQCLC5B2MTTF63G73E64ILU======',
+                "X-Access-Token": process.env.KEY,
                 'Content-Type': 'application/json',
             },
             method: "GET",
@@ -211,7 +212,7 @@ function getRestaurantMenuItems(apiKey) {
 
 function getRecipes(mealData) {
 
-    const apiKeySpoon = "apiKey=2829f625e48b49fdb3cbc14c2bd99794"
+    const apiKeySpoon = process.env.KEYR
     let queryURL = "https://api.spoonacular.com/recipes/search?" + apiKeySpoon + "&" + keyWords + "&number=5"
 
     return $.ajax({
