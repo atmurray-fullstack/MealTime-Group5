@@ -1,8 +1,8 @@
 {
   "name": "MealTime-Group5",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Helps you plan for meals",
+  "main": "server.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
@@ -17,7 +17,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon server.js"
   },
   "repository": {
     "type": "git",

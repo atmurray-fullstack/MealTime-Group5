@@ -1,6 +1,7 @@
 let mealTimeCurrentUser = {};
 mealTimeCurrentUser.name = getCookie("mealTime-userName");
 mealTimeCurrentUser.address = getCookie("mealTime-userAddress");
+localStorage.setItem("user", JSON.stringify(mealTimeCurrentUser))
 if (mealTimeCurrentUser.name === "false") {
   document.location.href = '/'
 }
@@ -13,9 +14,11 @@ const keyWords = $("#key-words").val();
 var currYear = (new Date()).getFullYear();
 
 $(document).ready(function () {
+
   const form = $("form")
   const newInputTag = $("<input>").attr("type", "hidden").attr("name", "address").attr("value", mealTimeCurrentUser.address)
   form.append(newInputTag)
+
 
   $(".button-collapse").sideNav();
 

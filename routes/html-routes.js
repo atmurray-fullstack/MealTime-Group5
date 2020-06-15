@@ -1,7 +1,7 @@
 
-const sequelize = require('sequelize');
-const User = require('../models/User')
+
 const path = require('path')
+
 module.exports = function (app) {
    console.log('html-routes');
 

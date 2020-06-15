@@ -1,18 +1,27 @@
-var Sequelize = require("sequelize");
-const sequelize = require('../config/connection.js');
-///building Orders model
-const Orders = sequelize.define('orders', {
-    userName: Sequelize.STRING,
-    restaurant: Sequelize.STRING,
-    orders: Sequelize.STRING,
-    total: Sequelize.DECIMAL,
-    orderDate: Sequelize.DATEONLY
-}, { 
-    freezeTableName: true,
-    timestamps:false
-});
+module.exports = function (sequelize, DataTypes) {
 
-Orders.sync();
+    var orders = sequelize.define("orders", {
+        userName: {
+            type: DataTypes.STRING,
+            validate: {
+                isEmail: true
+            }
+        },
 
-
-module.exports = Orders;
+        restaurant: {
+            type: DataTypes.STRING,
+        },
+        orders: {
+            type: DataTypes.STRING,
+        },
+        total: {
+            type: DataTypes.DECIMAL,
+        },
+        orderDate: {
+            type: DataTypes.DATEONLY,
+        },
+    },{
+        timestamps: false
+    });
+    return orders
+};
